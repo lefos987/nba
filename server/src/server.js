@@ -2,7 +2,7 @@ import Hapi from 'hapi';
 import Good from 'good';
 import GoodConsole from 'good-console';
 
-import Homepage from './homepage/homepage';
+import Index from './index/index';
 
 var server = new Hapi.Server();
 
@@ -11,7 +11,7 @@ server.connection({
     port: 3000
 });
 
-server.route(new Homepage());
+server.route(new Index());
 
 server.register({
     register: Good,
