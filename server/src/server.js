@@ -2,7 +2,8 @@ import Hapi from 'hapi';
 import Good from 'good';
 import GoodConsole from 'good-console';
 
-import Index from './index/index';
+import Index from './index/index.route';
+import EventsService from './system/events/events.svc';
 
 var server = new Hapi.Server();
 
@@ -29,6 +30,9 @@ server.register({
         throw err;
     }
 });
+
+//EventsService.getEvents('2014-12-25T00:00:00-05:00');
+//EventsService.saveEvents();
 
 server.start(() => {
     console.log('* Server running at :', server.info.uri);
