@@ -3,7 +3,8 @@ export const API_CONFIG = {
     user_agent: 'elparask@gmail.com',
     host: 'erikberg.com',
     endpoints: {
-        events: '/events.json'
+        events: '/events.json',
+        boxscore: ''
     }
 };
 

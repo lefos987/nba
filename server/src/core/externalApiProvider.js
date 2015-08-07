@@ -9,7 +9,10 @@ class ExternalApiProvider {
     }
 
     constructUrl() {
-        let paramsUrl = this.urlParams.map((param) => '/' + param);
+        let paramsUrl = '';
+        this.urlParams.forEach((param) => {
+            paramsUrl += '/' + param;
+        });
         return 'https://' + this.host + paramsUrl + this.method;
     }
 }

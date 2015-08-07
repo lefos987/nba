@@ -12,8 +12,8 @@ class EventsRoute extends Route {
 
     handler(request, reply) {
 
-        EventsService.getEvents('2014-12-25T00:00:00-05:00')
-            .then((result) => EventsService.saveEvents(result.date, result.data))
+        EventsService.getEventsFromApi('2014-12-25T00:00:00-05:00')
+            .then((result) => EventsService.saveEventsToDb(result.date, result.data))
             .then((data) => {
                 reply({ data });
             })

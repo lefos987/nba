@@ -20,7 +20,7 @@ class EventsService {
         this.url = XmlStatsApiProvider.constructUrl();
     }
 
-    getEvents(date) {
+    getEventsFromApi(date) {
 
         let deferred = q.defer();
 
@@ -48,13 +48,38 @@ class EventsService {
         return deferred.promise;
     }
 
-    saveEvents(date, events) {
+    eventIdsForDate(date) {
+        return this.getEventsFromDb(date)
+            .then((data) => {
+                let events = data.event;
+                return events.map((event) => event.event_id);
+            });
+    }
+
+    getEventsFromDb(date) {
+        let deferred = q.defer();
+        let key = 'event_' + date;
+
+        redisClient.get(key, (err, data) => {
+            if (err) {
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(JSON.parse(data));
+            }
+        });
+
+        return deferred.promise;
+    }
+
+    saveEventsToDb(date, events) {
 
         let deferred = q.defer();
+        let key = 'event_' + date;
 
         events = JSON.stringify(events);
 
-        redisClient.set(date, events, (err, data) => {
+        redisClient.set(key, events, (err, data) => {
             if (err) {
                 deferred.reject(err);
             }
