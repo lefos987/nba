@@ -1,0 +1,35 @@
+@import './components/layout/header';
+
+header-height = 75px;
+
+.header {
+
+	background: pink;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: header-height;
+	
+}
+.logo {
+	background: red;
+
+	.logo-img {
+		height: header-height;
+		object-fit: contain;
+	}
+}
+
+.menu {
+
+	background: green;
+	display: flex;
+	flex-direction: row;
+	margin: 0;
+	padding: 0;
+
+	.menu-item {
+		list-style: none;
+	}
+}

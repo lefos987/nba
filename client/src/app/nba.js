@@ -1,39 +1,17 @@
 import React from 'react';
-
 import Router from 'react-router';
 
+import Layout from './components/layout/layout';
 import HomePage from './components/homepage';
 import SystemPage from './components/systempage';
 
 let DefaultRoute = Router.DefaultRoute;
-let Link = Router.Link;
 let Route = Router.Route;
-let RouteHandler = Router.RouteHandler;
-
-let App = React.createClass({
-
-    render() {
-        return (
-            <div>
-                <header>
-                    <ul>
-                        <li><Link to="home">Home</Link></li>
-                        <li><Link to="system">System</Link></li>
-                    </ul>
-                </header>
-
-                {/* this is the important part */}
-                <RouteHandler/>
-            </div>
-        );
-
-    }
-});
 
 let routes = (
-    <Route name="app" path="/" handler={App}>
-        <Route name="system" handler={SystemPage} />
+    <Route name="layout" path="/" handler={Layout}>
         <DefaultRoute name="home" handler={HomePage} />
+        <Route name="system" handler={SystemPage} />
     </Route>
 );
 
