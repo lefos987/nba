@@ -1,9 +1,9 @@
-import Api from '../api/api';
+import Api from '../../api/system/system.api';
 
-import NbaDispatcher from '../dispatcher/nbaDispatcher';
-import { ACTION_TYPES } from '../constants/nbaConstants';
+import NbaDispatcher from '../../dispatcher/nba.dispatcher';
+import { ACTION_TYPES } from '../../constants/nba.constants';
 
-class NbaActions {
+class SystemActions {
 
     saveEvents() {
         NbaDispatcher.handleViewAction({
@@ -22,5 +22,5 @@ class NbaActions {
     }
 }
 
-let _NbaActions = new NbaActions();
-export default _NbaActions;
+let _SystemActions = new SystemActions();
+export default _SystemActions;

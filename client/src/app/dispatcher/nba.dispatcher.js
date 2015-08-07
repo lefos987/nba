@@ -1,6 +1,6 @@
 import { Dispatcher } from 'flux';
 
-import { PAYLOAD_SOURCES } from '../constants/nbaConstants';
+import { PAYLOAD_SOURCES } from '../constants/nba.constants';
 
 class NbaDispatcher extends Dispatcher {
 

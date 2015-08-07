@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 
-import NbaDispatcher from '../dispatcher/nbaDispatcher';
-import { ACTION_TYPES } from '../constants/nbaConstants';
+import NbaDispatcher from '../../dispatcher/nba.dispatcher';
+import { ACTION_TYPES } from '../../constants/nba.constants';
 
 const CHANGE_EVENT = 'CHANGE_EVENT';
 

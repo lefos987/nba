@@ -1,7 +1,7 @@
 import React from 'react';
 
-import NbaActions from '../actions/nbaActions';
-import SystemStore from '../stores/systemStore';
+import SystemActions from '../../actions/system/system.actions';
+import SystemStore from '../../stores/system/system.store';
 
 let getStatusState = () => SystemStore.getSystemStatus();
 
@@ -9,10 +9,12 @@ class SystemPage extends React.Component {
 
     constructor() {
         super();
+
         this.state = {
             status: getStatusState(),
             showEventsLoader: false
         };
+
         this._onClick = this._onClick.bind(this);
         this._onChange = this._onChange.bind(this);
     }
@@ -33,7 +35,7 @@ class SystemPage extends React.Component {
 
     _onClick() {
         this.setState({ showEventsLoader: true });
-        NbaActions.saveEvents();
+        SystemActions.saveEvents();
     }
 
     render() {
@@ -41,7 +43,7 @@ class SystemPage extends React.Component {
             <div>
                 <h1>This is my system page</h1>
                 { this.state.showEventsLoader ? <p>Saving events ... {this.state.status.events}</p> : null }
-                <button onClick={this._onClick}>Update Schedule Data</button>
+                <button onClick={this._onClick}>Update Events Data</button>
             </div>
         );
     }

@@ -1,7 +1,7 @@
 import request from 'superagent';
 
-import { API_ENDPOINTS } from '../constants/nbaConstants';
-import NbaActions from '../actions/nbaActions';
+import { API_ENDPOINTS } from '../../constants/nba.constants';
+import SystemActions from '../../actions/system/system.actions';
 
 const HOST = 'http://localhost:3000';
 
@@ -12,11 +12,11 @@ let Api = {
             .post(HOST + API_ENDPOINTS.SYSTEM.EVENTS)
             .end((err, res) => {
                 if(err) {
-                    NbaActions.saveEventsResponse(err);
+                    SystemActions.saveEventsResponse(err);
                 }
                 else {
                     let data = JSON.parse(res.text);
-                    NbaActions.saveEventsResponse(null, data);
+                    SystemActions.saveEventsResponse(null, data);
                 }
             });
     }
