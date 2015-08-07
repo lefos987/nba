@@ -1,3 +1,8 @@
 .idea/
 server/node_modules
 server/build
+server/public
+
+client/node_modules
+client/dist
+client/js-test-reporting

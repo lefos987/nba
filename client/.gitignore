@@ -1,0 +1,9 @@
+#Ignore WebStorm project fiels
+.idea
+
+#Bower Components & Node Modules
+bower_components
+node_modules
+
+#Distribution Folder
+dist
