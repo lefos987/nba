@@ -1,4 +1,5 @@
 import request from 'superagent';
+import q from 'q';
 
 import { API_CONFIG } from '../../constants/constants';
 import ExternalApiProvider from '../../core/externalApiProvider';
@@ -21,7 +22,10 @@ class EventsService {
 
     getEvents(date) {
 
+        let deferred = q.defer();
+
         date = formatDate(date);
+
         request
             .get(this.url)
             .set('Authorization', 'Bearer ' + API_CONFIG.api_key)
@@ -29,16 +33,37 @@ class EventsService {
             .query({ date })
             .end((err, data) => {
                 if (err) {
-                    console.log('err ->', err);
+                    deferred.reject(err);
                 }
                 else {
-                    this.saveEvents(date, JSON.stringify(data.res.body));
+                    let result = {
+                        date,
+                        data: data.res.body
+                    };
+
+                    deferred.resolve(result);
                 }
             });
+
+        return deferred.promise;
     }
 
     saveEvents(date, events) {
-        redisClient.set(date, events);
+
+        let deferred = q.defer();
+
+        events = JSON.stringify(events);
+
+        redisClient.set(date, events, (err, data) => {
+            if (err) {
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(data);
+            }
+        });
+
+        return deferred.promise;
     }
 }
 

@@ -1,6 +1,6 @@
 import Route from '../core/route';
 
-class Index extends Route {
+class IndexRoute extends Route {
 
     constructor(method = 'GET', path='/{param*}') {
 
@@ -16,4 +16,4 @@ class Index extends Route {
     }
 }
 
-export default Index;
+export default IndexRoute;

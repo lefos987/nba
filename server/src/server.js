@@ -2,17 +2,21 @@ import Hapi from 'hapi';
 import Good from 'good';
 import GoodConsole from 'good-console';
 
-import Index from './index/index.route';
-import EventsService from './system/events/events.svc';
+import IndexRoute from './index/index.route';
+import EventsRoute from './system/events/events.route';
 
 var server = new Hapi.Server();
 
 server.connection({
     host: 'localhost',
-    port: 3000
+    port: 3000,
+    routes: {
+        cors: true
+    }
 });
 
-server.route(new Index());
+server.route(new IndexRoute());
+server.route(new EventsRoute());
 
 server.register({
     register: Good,
@@ -30,9 +34,6 @@ server.register({
         throw err;
     }
 });
-
-//EventsService.getEvents('2014-12-25T00:00:00-05:00');
-//EventsService.saveEvents();
 
 server.start(() => {
     console.log('* Server running at :', server.info.uri);

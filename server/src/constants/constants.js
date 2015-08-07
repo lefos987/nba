@@ -6,3 +6,9 @@ export const API_CONFIG = {
         events: '/events.json'
     }
 };
+
+export const INTERNAL_API = {
+    system: {
+        events: '/api/v1/system/events'
+    }
+};

@@ -3,11 +3,13 @@ import request from 'superagent';
 import { API_ENDPOINTS } from '../constants/nbaConstants';
 import NbaActions from '../actions/nbaActions';
 
+const HOST = 'http://localhost:3000';
+
 let Api = {
 
     saveEvents() {
         request
-            .post(API_ENDPOINTS.SYSTEM.EVENTS)
+            .post(HOST + API_ENDPOINTS.SYSTEM.EVENTS)
             .end((err, res) => {
                 if(err) {
                     NbaActions.saveEventsResponse(err);

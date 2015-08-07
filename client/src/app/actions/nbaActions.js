@@ -13,11 +13,11 @@ class NbaActions {
         Api.saveEvents();
     }
 
-    saveEventsResponse(err, data) {
+    saveEventsResponse(err, response) {
         NbaDispatcher.handleServerAction({
             type: ACTION_TYPES.SYSTEM.SAVE_EVENTS_RESPONSE,
             err,
-            data
+            response
         });
     }
 }

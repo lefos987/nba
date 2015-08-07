@@ -5,7 +5,13 @@ import { ACTION_TYPES } from '../constants/nbaConstants';
 
 const CHANGE_EVENT = 'CHANGE_EVENT';
 
+let _status = {};
+
 class SystemStore extends EventEmitter {
+
+    getSystemStatus() {
+        return _status;
+    }
 
     emitChange() {
         this.emit(CHANGE_EVENT);
@@ -29,6 +35,7 @@ NbaDispatcher.register((payload) => {
 
     switch (action.type) {
         case ACTION_TYPES.SYSTEM.SAVE_EVENTS_RESPONSE:
+            _status.events = action.response.data;
             _SystemStore.emitChange();
             break;
     }
