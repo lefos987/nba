@@ -3,31 +3,26 @@ import q from 'q';
 
 import { API_CONFIG } from '../../constants/constants';
 import ExternalApiProvider from '../../core/externalApiProvider';
-import redisClient from '../../core/redisClient';
+import DbService from '../../core/db.svc';
 import { formatDate } from '../../core/utils';
 
-class EventsService {
+class EventsService extends DbService{
 
-    constructor() {
+    getEventsFromApi(date) {
 
+        let deferred = q.defer();
         let config = {
             host: API_CONFIG.host,
             method: API_CONFIG.endpoints.events,
             urlParams: ['nba']
         };
-
         let XmlStatsApiProvider = new ExternalApiProvider(config);
-        this.url = XmlStatsApiProvider.constructUrl();
-    }
-
-    getEventsFromApi(date) {
-
-        let deferred = q.defer();
+        let url = XmlStatsApiProvider.constructUrl();
 
         date = formatDate(date);
 
         request
-            .get(this.url)
+            .get(url)
             .set('Authorization', 'Bearer ' + API_CONFIG.api_key)
             .set('User-Agent', API_CONFIG.user_agent)
             .query({ date })
@@ -49,47 +44,19 @@ class EventsService {
     }
 
     eventIdsForDate(date) {
-        return this.getEventsFromDb(date)
+
+        return this.getFromDb(this.key(date))
             .then((data) => {
                 let events = data.event;
                 return events.map((event) => event.event_id);
             });
     }
 
-    getEventsFromDb(date) {
-        let deferred = q.defer();
-        let key = 'event_' + date;
-
-        redisClient.get(key, (err, data) => {
-            if (err) {
-                deferred.reject(err);
-            }
-            else {
-                deferred.resolve(JSON.parse(data));
-            }
-        });
-
-        return deferred.promise;
+    key(date) {
+        date = formatDate(date);
+        return 'events_' + date;
     }
 
-    saveEventsToDb(date, events) {
-
-        let deferred = q.defer();
-        let key = 'event_' + date;
-
-        events = JSON.stringify(events);
-
-        redisClient.set(key, events, (err, data) => {
-            if (err) {
-                deferred.reject(err);
-            }
-            else {
-                deferred.resolve(data);
-            }
-        });
-
-        return deferred.promise;
-    }
 }
 
 let _EventsService = new EventsService();
