@@ -7,9 +7,9 @@ class Request {
 
         params = params || {};
 
-        console.log('params ->', params);
-        this.host      = params.host || null;
         this.method    = params.method || null;
+        this.host      = params.host || null;
+        this.endpoint  = params.endpoint  || null;
         this.urlParams = params.urlParams || null;
         this.headers   = params.headers || null;
         this.query     = params.query || null;
@@ -21,7 +21,7 @@ class Request {
         this.urlParams.forEach((param) => {
             paramsUrl += '/' + param;
         });
-        return 'https://' + this.host + paramsUrl + '/' + this.method;
+        return 'https://' + this.host + paramsUrl + '/' + this.endpoint;
     }
 
     send(errHandler, successHandler) {
@@ -33,11 +33,11 @@ class Request {
             .query(this.query)
             .end((err, data) => {
                 if (err) {
-                    let error = errHandler(err) || err;
+                    let error = (errHandler) ? errHandler(err) : err;
                     deferred.reject(error);
                 }
                 else {
-                    let result = successHandler(data) || data;
+                    let result = (successHandler) ? successHandler(data) : data;
                     deferred.resolve(result);
                 }
             });

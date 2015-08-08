@@ -10,8 +10,9 @@ class EventsService extends DbService{
         date = formatDate(date);
 
         let req = new Request({
+            method: 'GET',
             host: XML_STATS_API.host,
-            method: XML_STATS_API.endpoints.events,
+            endpoint: XML_STATS_API.endpoints.events,
             headers: XML_STATS_API.headers,
             urlParams: ['nba'],
             query: { date }

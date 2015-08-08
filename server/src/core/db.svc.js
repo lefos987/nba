@@ -34,12 +34,14 @@ class DbService {
 
         data = JSON.stringify(data);
 
-        this.client.set(key, data, (err, data) => {
+        this.client.set(key, data, (err, result) => {
             if (err) {
                 deferred.reject(err);
             }
             else {
-                deferred.resolve(data);
+                let resultObj = {};
+                resultObj[key] = result;
+                deferred.resolve(resultObj);
             }
         });
 

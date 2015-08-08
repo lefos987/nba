@@ -1,76 +1,62 @@
-import request from 'superagent';
 import q from 'q';
-
-import { API_CONFIG } from '../../constants/constants';
-import EventsService from '../events/events.svc';
-import RequestObject from '../../core/request';
+import { XML_STATS_API } from '../../constants/constants';
+import { delay } from '../../core/utils';
+import DbService from '../../core/db.svc';
+import Request from '../../core/request';
 import RequestQueue from '../../core/requestQueue.svc';
+import EventsService from '../events/events.svc';
 
-class BoxscoreService {
+class BoxscoreService extends DbService{
 
-    //constructBoxscoreRequests(eventIds) {
-    //    return q.fcall(() => {
-    //        return eventIds.map((eventId) => {
-    //
-    //            let method = 'GET';
-    //            let config = {
-    //                host: API_CONFIG.host,
-    //                method: eventId + '.json',
-    //                urlParams: ['nba', 'boxscore']
-    //            };
-    //            let XmlStatsApiProvider = new ExternalApiProvider(config);
-    //            let url = XmlStatsApiProvider.constructUrl();
-    //
-    //            let headers = {
-    //                'Authorization': 'Bearer ' + API_CONFIG.api_key,
-    //                'User-Agent': API_CONFIG.user_agent
-    //            };
-    //            return new RequestObject({method, url, headers});
-    //        });
-    //    });
-    //}
+    _constructBoxscoreRequests(eventIds) {
 
-    //addBoxscoreRequestsToQueue (date) {
-    //
-    //    EventsService.eventIdsForDate(date)
-    //        .then((eventIds) => this.constructBoxscoreRequests(eventIds))
-    //        .then((boxscoreRequests) => {
-    //            boxscoreRequests.forEach((boxscoreRequest) => {
-    //                RequestQueue.addToQueue(boxscoreRequest);
-    //            });
-    //        });
-    //}
-    
-    //getBoxscoreForEventFromApi(eventId) {
-    //
-    //    let deferred = q.defer();
-    //    let config = {
-    //        host: API_CONFIG.host,
-    //        method: eventId + '.json',
-    //        urlParams: ['nba', 'boxscore']
-    //    };
-    //    let XmlStatsApiProvider = new ExternalApiProvider(config);
-    //    let url = XmlStatsApiProvider.constructUrl();
-    //
-    //    request
-    //        .get(url)
-    //        .set('Authorization', 'Bearer ' + API_CONFIG.api_key)
-    //        .set('User-Agent', API_CONFIG.user_agent)
-    //        .end((err, data) => {
-    //
-    //            if(err) {
-    //                deferred.reject(err);
-    //            }
-    //            else {
-    //                let result = {
-    //                    data: data.res.body
-    //                };
-    //
-    //                deferred.resolve(result);
-    //            }
-    //        });
-    //    return deferred.promise;
-    //}
+        return q.fcall(() => {
+            
+            return eventIds.map((eventId) => {
+
+                return new Request({
+                    method: 'GET',
+                    host: XML_STATS_API.host,
+                    endpoint: XML_STATS_API.endpoints.boxscore + eventId + '.json',
+                    headers: XML_STATS_API.headers,
+                    urlParams: ['nba', 'boxscore']
+                });
+
+            });
+        });
+    }
+
+    _addBoxscoreRequestsToQueue(date) {
+
+        return EventsService.eventIdsForDate(date)
+
+            .then((eventIds) => this._constructBoxscoreRequests(eventIds))
+
+            .then((boxscoreRequests) => RequestQueue.addToQueue(boxscoreRequests))
+
+            .then((requestQueue) => requestQueue);
+    }
+
+    getBoxscoresFromApi(date) {
+
+        return this._addBoxscoreRequestsToQueue(date)
+
+            .then((requestQueue) => {
+                let promises = [];
+
+                requestQueue.forEach((request, index) => {
+                    let send = request.send.bind(request);
+                    let successHandler = (data) => ({
+                        eventId: request.endpoint.split('.')[0],
+                        data: data.res.body
+                    });
+                    promises.push(delay(send, index, 12000, null, successHandler));
+                });
+
+                return promises;
+            });
+    }
+
 }
 
 let _BoxscoreService = new BoxscoreService();
