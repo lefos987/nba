@@ -17,8 +17,11 @@ class DbService {
             if (err) {
                 deferred.reject(err);
             }
+            if (!err && !data) {
+                deferred.reject({ data: [] });
+            }
             else {
-                deferred.resolve(JSON.parse(data));
+                deferred.resolve({ data: JSON.parse(data) });
             }
         });
 

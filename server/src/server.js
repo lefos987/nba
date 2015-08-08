@@ -5,6 +5,8 @@ import GoodConsole from 'good-console';
 import IndexRoute from './index/index.route';
 import EventsRoute from './system/events/events.route';
 
+import Boxscore from './system/boxscore/boxscore.svc';
+
 var server = new Hapi.Server();
 
 server.connection({
