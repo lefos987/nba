@@ -1,6 +1,6 @@
 import React from 'react';
 import Router from 'react-router';
-import Header from './header';
+import Header from './header/header';
 
 let RouteHandler = Router.RouteHandler;
 

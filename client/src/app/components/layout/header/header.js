@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Logo from './logo/logo';
-import Menu from './menu/menu';
+import Logo from './../logo/logo';
+import Menu from './../menu/menu';
 
 class Header extends React.Component {
 

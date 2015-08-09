@@ -1,35 +1,34 @@
-@import './components/layout/header';
+@import './components/layout/grid/_grid';
+@import './components/layout/header/_header';
+@import './components/layout/logo/_logo';
+@import './components/layout/menu/_menu';
 
-header-height = 75px;
+@import './components/system/system-console/_system-console';
 
-.header {
+console-bg = #333333;
+console-font-color = #00ff00;
 
-	background: pink;
+.console {
 
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	height: header-height;
-	
-}
-.logo {
-	background: red;
+	flex: 1;
+	background: console-bg;
+	color: console-font-color;
+	font-family: Consolas, Menlo, Monaco, monospace;
 
-	.logo-img {
-		height: header-height;
-		object-fit: contain;
+	.console-title {
+		font-weight: bold;
+		margin-bottom: 10px;
+		border-bottom: 1px dashed console-font-color;
 	}
-}
 
-.menu {
+	.console-entries {
 
-	background: green;
-	display: flex;
-	flex-direction: row;
-	margin: 0;
-	padding: 0;
+		margin: 0;
+		padding: 0;
 
-	.menu-item {
-		list-style: none;
+		.console-entry {
+			list-style: none;
+
+		}
 	}
 }
