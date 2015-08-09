@@ -22,11 +22,12 @@ class DbService {
             if (err) {
                 deferred.reject(err);
             }
-            if (!err && !data) {
-                deferred.reject([]);
+            if ((!err && !data) || (!err && data.length === 0)) {
+                deferred.resolve([]);
             }
             else {
-                deferred.resolve(JSON.parse(data));
+                let result = data.map((d) => JSON.parse(d));
+                deferred.resolve(result);
             }
         });
 
@@ -100,11 +101,12 @@ class DbService {
                     if (err) {
                         deferred.reject(err);
                     }
-                    if (!err && !data) {
-                        deferred.reject([]);
+                    if ((!err && !data) || (!err && data.length === 0)) {
+                        deferred.resolve([]);
                     }
                     else {
-                        deferred.resolve(JSON.parse(data));
+                        let result = data.map((d) => JSON.parse(d));
+                        deferred.resolve(result);
                     }
                 });
 

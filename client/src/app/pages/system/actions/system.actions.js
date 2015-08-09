@@ -1,8 +1,23 @@
-import Api from '../../api/system/system.api';
-import NbaDispatcher from '../../dispatcher/nba.dispatcher';
-import { ACTION_TYPES } from '../../constants/nba.constants';
+import Api from '../api/system.api';
+import NbaDispatcher from '../../../dispatcher/nba.dispatcher';
+import { ACTION_TYPES } from '../../../constants/nba.constants';
 
 class SystemActions {
+
+    getLogEntries(type) {
+        NbaDispatcher.handleViewAction({
+            type: ACTION_TYPES.SYSTEM.GET_LOG_ENTRIES
+        });
+        Api.getLogEntries(type);
+    }
+
+    getLogEntriesResponse(err, response) {
+        NbaDispatcher.handleServerAction({
+            type: ACTION_TYPES.SYSTEM.GET_LOG_ENTRIES_RESPONSE,
+            err,
+            response
+        });
+    }
 
     saveBoxscores() {
         NbaDispatcher.handleViewAction({

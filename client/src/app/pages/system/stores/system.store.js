@@ -1,16 +1,16 @@
 import { EventEmitter } from 'events';
 
-import NbaDispatcher from '../../dispatcher/nba.dispatcher';
-import { ACTION_TYPES } from '../../constants/nba.constants';
+import NbaDispatcher from '../../../dispatcher/nba.dispatcher';
+import { ACTION_TYPES } from '../../../constants/nba.constants';
 
 const CHANGE_EVENT = 'CHANGE_EVENT';
 
-let _status = {};
+let _entries = [];
 
 class SystemStore extends EventEmitter {
 
-    getSystemStatus() {
-        return _status;
+    getLogEntries() {
+        return _entries;
     }
 
     emitChange() {
@@ -35,13 +35,8 @@ NbaDispatcher.register((payload) => {
 
     switch (action.type) {
 
-        case ACTION_TYPES.SYSTEM.SAVE_EVENTS_RESPONSE:
-            _status.events = action.response.data;
-            _SystemStore.emitChange();
-            break;
-
-        case ACTION_TYPES.SYSTEM.SAVE_BOXSCORES_RESPONSE:
-            _status.boxscores = action.response.data;
+        case ACTION_TYPES.SYSTEM.GET_LOG_ENTRIES_RESPONSE:
+            _entries = action.response.log.entries;
             _SystemStore.emitChange();
             break;
     }
