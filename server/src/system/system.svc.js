@@ -12,6 +12,9 @@ class SystemService extends DbService {
     }
 
     transformData(type, data) {
+        for (let d in data) {
+            data[d] = (data[d] === 'OK') ? 1 : 0;
+        }
         return {
             type,
             data,
