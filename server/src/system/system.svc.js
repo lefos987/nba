@@ -3,23 +3,23 @@ import DbService from '../core/db.svc';
 
 class SystemService extends DbService {
 
-    key(d) {
-        let k = Object.keys(d);
-        if (k.length > 1) {
-            throw new Error('System key can only be generated for a single object');
-        }
-        return 'system_' + k;
+    key(type) {
+        return 'system_' + type;
     }
 
-    transformData(type, data) {
+    transformData(data) {
         for (let d in data) {
             data[d] = (data[d] === 'OK') ? 1 : 0;
         }
         return {
-            type,
             data,
             date: moment.utc().format()
         };
+    }
+
+    getSystemLogEntriesOfType(type) {
+        let list = this.key(type);
+        return this.getFromListOfDb(list);
     }
 }
 

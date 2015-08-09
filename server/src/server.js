@@ -3,7 +3,8 @@ import Good from 'good';
 import GoodConsole from 'good-console';
 
 import IndexRoute from './index/index.route';
-import EventsRoute from './system/events/events.route';
+import EventsGetRoute from './system/events/events.get.route';
+import EventsPostRoute from './system/events/events.post.route';
 import BoxscoreRoute from './system/boxscore/boxscore.route';
 
 
@@ -18,7 +19,8 @@ server.connection({
 });
 
 server.route(new IndexRoute());
-server.route(new EventsRoute());
+server.route(new EventsGetRoute());
+server.route(new EventsPostRoute());
 server.route(new BoxscoreRoute());
 
 server.register({
