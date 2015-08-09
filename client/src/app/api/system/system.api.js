@@ -7,6 +7,20 @@ const HOST = 'http://localhost:3000';
 
 let Api = {
 
+    saveBoxscores() {
+        request
+            .post(HOST + API_ENDPOINTS.SYSTEM.BOXSCORES)
+            .end((err, res) => {
+                if(err) {
+                    SystemActions.saveBoxscoresResponse(err);
+                }
+                else {
+                    let data = JSON.parse(res.text);
+                    SystemActions.saveBoxscoresResponse(null, data);
+                }
+            });
+    },
+
     saveEvents() {
         request
             .post(HOST + API_ENDPOINTS.SYSTEM.EVENTS)

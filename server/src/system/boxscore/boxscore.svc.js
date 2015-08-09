@@ -44,7 +44,11 @@ class BoxscoreService extends DbService{
             .then((requestQueue) => {
                 let promises = [];
 
-                requestQueue.forEach((request, index) => {
+                let lefos = [
+                    requestQueue[0],
+                    requestQueue[1]
+                ];
+                lefos.forEach((request, index) => {
                     let send = request.send.bind(request);
                     let successHandler = (data) => ({
                         eventId: request.endpoint.split('.')[0],

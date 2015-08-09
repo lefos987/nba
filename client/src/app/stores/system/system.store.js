@@ -34,8 +34,14 @@ NbaDispatcher.register((payload) => {
     let action = payload.action;
 
     switch (action.type) {
+
         case ACTION_TYPES.SYSTEM.SAVE_EVENTS_RESPONSE:
             _status.events = action.response.data;
+            _SystemStore.emitChange();
+            break;
+
+        case ACTION_TYPES.SYSTEM.SAVE_BOXSCORES_RESPONSE:
+            _status.boxscores = action.response.data;
             _SystemStore.emitChange();
             break;
     }
