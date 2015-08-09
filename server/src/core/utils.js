@@ -12,3 +12,10 @@ export let delay = (asyncFn, timerIndex, delay, errCb, successCb) => {
 
     return deferred.promise;
 };
+
+export let transformToArray = (obj) => {
+    if (!Array.isArray(obj)) {
+        return [obj];
+    }
+    return obj;
+}

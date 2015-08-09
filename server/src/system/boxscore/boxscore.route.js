@@ -2,6 +2,7 @@ import q from 'q';
 import Boom from 'boom';
 import Route from '../../core/route';
 import { INTERNAL_API } from '../../constants/constants';
+import SystemService from '../system.svc';
 import BoxscoreService from './boxscore.svc';
 
 class BoxscoreRoute extends Route {
@@ -21,8 +22,9 @@ class BoxscoreRoute extends Route {
             })
 
             .then((saveToDbPromises) => {
-                q.all(saveToDbPromises).then((data) => {
-                    reply({ data });
+                return q.all(saveToDbPromises).then((dbResults) => {
+                    return dbResults.map((result) =>
+                        SystemService.saveToDb(SystemService.key(result), SystemService.transformData('boxscores', result)));
                 });
             })
 

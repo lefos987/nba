@@ -5,6 +5,14 @@ import { formatDate } from '../../core/utils';
 
 class EventsService extends DbService{
 
+    areAllEventsCompleted(events) {
+        let result = (events.length > 0);
+        events.forEach((event) => {
+            result = (event.event_status === 'completed');
+        });
+        return result;
+    }
+
     getEventsFromApi(date) {
 
         date = formatDate(date);
