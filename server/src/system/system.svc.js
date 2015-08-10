@@ -7,19 +7,33 @@ class SystemService extends DbService {
         return 'system_' + type;
     }
 
-    transformData(data) {
-        for (let d in data) {
-            data[d] = (data[d] === 'OK') ? 1 : 0;
-        }
+    createLogEntry(params) {
+        let {type, operation, data} = params;
         return {
-            data,
-            date: moment.utc().format()
+            date: moment.utc().format(),
+            type,
+            operation,
+            data
         };
     }
 
     getSystemLogEntriesOfType(type) {
+
         let list = this.key(type);
-        return this.getFromListOfDb(list);
+
+        return this.getFromListOfDb(list).then((listItems) => {
+
+            return listItems.map((item) => ({
+                date: item.date,
+                data: {
+                    type: item.type,
+                    operation: item.operation,
+                    status: item.data.result[Object.keys(item.data.result)],
+                    date: item.data.date
+                }
+            }));
+            
+        });
     }
 }
 

@@ -25,19 +25,28 @@ class EventsPostRoute extends Route {
             .then((response) =>
                 (EventsService.areAllEventsCompleted(response.data.event)) ?
                     EventsService.saveToDb(EventsService.key(date), response.data) :
-                    { [EventsService.key(date)]: 'Events are not yet completed' }
+                    q.fcall(() => ({ [EventsService.key(date)]: 'Events are not yet completed' }))
             )
 
-            //3. We try to save a system log entry of the result of the db insert of step 2 to a redis list and return a promise
-            .then((eventDbInsertPromises) => {
-                return transformToArray(eventDbInsertPromises).map((eventDbInsertPromise) => {
-                    return SystemService.saveToListOfDb(SystemService.key('events'), SystemService.transformData(eventDbInsertPromise));
+            //3. We try to save a system log entry of the result of the db insert of step 2 to a redis list and return
+            // a promise
+            .then((saveEventsResults) => {
+                return transformToArray(saveEventsResults).map((saveEventsResult) => {
+                    let params = {
+                        data: {
+                            result: saveEventsResult,
+                            date
+                        },
+                        type: 'events',
+                        operation: 'insert'
+                    };
+                    return SystemService.saveToListOfDb(SystemService.key('events'), SystemService.createLogEntry(params));
                 });
             })
 
             //4. We resolve the promises of saving the system log entry to a Redis list and we send reply to the client
-            .then((eventListInsertPromises) => {
-                q.all(eventListInsertPromises).then((result) => {
+            .then((saveLogEntriesResults) => {
+                q.all(saveLogEntriesResults).then((result) => {
                     reply({ result });
                 });
             })

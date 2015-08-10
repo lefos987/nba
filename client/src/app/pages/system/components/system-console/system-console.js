@@ -1,4 +1,5 @@
 import React from 'react';
+import { capitalize } from '../../../../common/utils';
 import SystemConsoleEntry from './system-console-entry';
 import SystemStore from '../../stores/system.store';
 import SystemActions from '../../actions/system.actions';
@@ -12,6 +13,7 @@ class SystemConsole extends React.Component {
     constructor(props) {
         super(props);
         this.state = getConsoleState(this.props.type);
+        this._getTitle = this._getTitle.bind(this);
         this._onChange = this._onChange.bind(this);
     }
 
@@ -23,7 +25,12 @@ class SystemConsole extends React.Component {
     componentWillUnmount() {
         SystemStore.removeChangeListener(this._onChange);
     }
-    
+
+    _getTitle() {
+        let type = this.props.type;
+        return capitalize(type);
+    }
+
     _onChange() {
         this.setState(getConsoleState());
     }
@@ -37,7 +44,7 @@ class SystemConsole extends React.Component {
         return (
             <div className="row">
                 <div className="console column">
-                    <h3 className="console-title">Events</h3>
+                    <h3 className="console-title">{this._getTitle()}</h3>
                     <ul className="console-entries">
                         {entries}
                     </ul>

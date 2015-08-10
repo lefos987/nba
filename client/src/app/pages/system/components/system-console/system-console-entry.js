@@ -1,35 +1,46 @@
 import React from 'react';
-import moment from 'moment';
+import { formatDate } from '../../../../common/utils';
+import { capitalize } from '../../../../common/utils';
 
 class SystemConsoleEntry extends React.Component {
 
     constructor(props) {
         super(props);
-        this._formatDate      = this._formatDate.bind(this);
         this._getLogEntryInfo = this._getLogEntryInfo.bind(this);
+        this._mapOperation    = this._mapOperation.bind(this);
     }
-
-    _formatDate(date) {
-        return moment(date).format('DD/MM/YYYY @ HH:mm');
-    }
-
-    _getLogEntryInfo(data) {
+    
+    _getLogEntryInfo(entry) {
+        console.log('entry ->', entry);
+        let entryType = capitalize(entry.data.type);
+        let entryDate = formatDate(entry.data.date, 'ddd DD MMM YYYY');
+        let entryOperation = this._mapOperation(entry.data.operation);
+        let message = `${entryOperation} *${entryType}* for ${entryDate}`;
+        let status = entry.data.status;
         return {
-            info: Object.keys(data),
-            status: data[Object.keys(data)]
+            message,
+            status
         };
     }
 
+    _mapOperation(operation) {
+        switch (operation) {
+            case 'insert':
+                return 'Saving';
+        }
+    }
+
     render() {
-        let date = this._formatDate(this.props.entry.date);
-        let {info, status} = this._getLogEntryInfo(this.props.entry.data);
+
+        let logEntryDate = formatDate(this.props.entry.date, 'DD/MM/YYYY @ HH:mm');
+        let {message, status} = this._getLogEntryInfo(this.props.entry);
         return (
             <li className="console-entry">
-                <span>[{ date }]</span>
+                <span>[{ logEntryDate }]</span>
                 <span>:</span>
-                <span>{info}</span>
+                <span>{ message }</span>
                 <span>|</span>
-                <span>{status}</span>
+                <span>{ status }</span>
             </li>
         );
     }
