@@ -11,15 +11,17 @@ class SystemConsoleEntry extends React.Component {
     }
     
     _getLogEntryInfo(entry) {
-        console.log('entry ->', entry);
         let entryType = capitalize(entry.data.type);
         let entryDate = formatDate(entry.data.date, 'ddd DD MMM YYYY');
         let entryOperation = this._mapOperation(entry.data.operation);
-        let message = `${entryOperation} *${entryType}* for ${entryDate}`;
+
+        let item = entry.data.item;
+        let message = `${entryOperation} ${entryType} for ${entryDate}`;
         let status = entry.data.status;
         return {
             message,
-            status
+            status,
+            item
         };
     }
 
@@ -33,7 +35,7 @@ class SystemConsoleEntry extends React.Component {
     render() {
 
         let logEntryDate = formatDate(this.props.entry.date, 'DD/MM/YYYY @ HH:mm');
-        let {message, status} = this._getLogEntryInfo(this.props.entry);
+        let {message, status, item} = this._getLogEntryInfo(this.props.entry);
         return (
             <li className="console-entry">
                 <span>[{ logEntryDate }]</span>
@@ -41,6 +43,7 @@ class SystemConsoleEntry extends React.Component {
                 <span>{ message }</span>
                 <span>|</span>
                 <span>{ status }</span>
+                <span>{ item }</span>
             </li>
         );
     }

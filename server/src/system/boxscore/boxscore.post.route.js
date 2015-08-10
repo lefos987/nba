@@ -7,13 +7,14 @@ import BoxscoreService from './boxscore.svc';
 
 class BoxscoreRoute extends Route {
 
-    constructor(method='POST', path=INTERNAL_API.system.boxscore) {
+    constructor(method='POST', path=INTERNAL_API.system.boxscores) {
         super({method, path});
     }
 
     handler(request, reply) {
 
-        BoxscoreService.getBoxscoresFromApi('2014-12-25')
+        let date = '2014-12-25';
+        BoxscoreService.getBoxscoresFromApi(date)
 
             .then((boxscorePromises) => {
                 return q.all(boxscorePromises).then((boxscores) => {
@@ -23,8 +24,22 @@ class BoxscoreRoute extends Route {
 
             .then((saveToDbPromises) => {
                 return q.all(saveToDbPromises).then((dbResults) => {
-                    return dbResults.map((result) =>
-                        SystemService.saveToDb(SystemService.key(result), SystemService.transformData('boxscores', result)));
+
+                    return dbResults.map((result) => {
+
+                        console.log('result ->', result);
+                        let params = {
+                            data: {
+                                result: result,
+                                date
+                            },
+                            type: 'boxscores',
+                            operation: 'insert'
+                        };
+                        SystemService.saveToListOfDb(SystemService.key('boxscores'), SystemService.createLogEntry(params));
+                    });
+
+
                 });
             })
 

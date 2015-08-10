@@ -11,8 +11,9 @@ class BoxscoreService extends DbService{
     _constructBoxscoreRequests(eventIds) {
 
         return q.fcall(() => {
-            
+
             return eventIds.map((eventId) => {
+
 
                 return new Request({
                     method: 'GET',
@@ -46,7 +47,8 @@ class BoxscoreService extends DbService{
 
                 let lefos = [
                     requestQueue[0],
-                    requestQueue[1]
+                    requestQueue[1],
+                    requestQueue[2]
                 ];
                 lefos.forEach((request, index) => {
                     let send = request.send.bind(request);

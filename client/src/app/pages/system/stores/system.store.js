@@ -9,8 +9,8 @@ let _entries = [];
 
 class SystemStore extends EventEmitter {
 
-    getLogEntries() {
-        return _entries;
+    getLogEntries(type) {
+        return _entries.filter((entry) => (entry.data.type === type));
     }
 
     emitChange() {
@@ -36,7 +36,9 @@ NbaDispatcher.register((payload) => {
     switch (action.type) {
 
         case ACTION_TYPES.SYSTEM.GET_LOG_ENTRIES_RESPONSE:
-            _entries = action.response.log.entries;
+            action.response.log.entries.forEach((entry) => {
+                _entries.push(entry);
+            });
             _SystemStore.emitChange();
             break;
     }

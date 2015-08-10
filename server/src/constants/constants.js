@@ -18,6 +18,6 @@ export const XML_STATS_API = {
 export const INTERNAL_API = {
     system: {
         events: '/api/v1/system/events',
-        boxscore: '/api/v1/system/boxscores'
+        boxscores: '/api/v1/system/boxscores'
     }
 };

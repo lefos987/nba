@@ -8,6 +8,7 @@ class SystemPage extends React.Component {
         return (
             <div className="container">
                 <SystemConsole type="events"/>
+                <SystemConsole type="boxscores"/>
             </div>
         );
     }

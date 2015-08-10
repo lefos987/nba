@@ -5,7 +5,8 @@ import GoodConsole from 'good-console';
 import IndexRoute from './index/index.route';
 import EventsGetRoute from './system/events/events.get.route';
 import EventsPostRoute from './system/events/events.post.route';
-import BoxscoreRoute from './system/boxscore/boxscore.route';
+import BoxscoreGetRoute from './system/boxscore/boxscore.get.route';
+import BoxscorePostRoute from './system/boxscore/boxscore.post.route';
 
 
 var server = new Hapi.Server();
@@ -21,7 +22,8 @@ server.connection({
 server.route(new IndexRoute());
 server.route(new EventsGetRoute());
 server.route(new EventsPostRoute());
-server.route(new BoxscoreRoute());
+server.route(new BoxscoreGetRoute());
+server.route(new BoxscorePostRoute());
 
 server.register({
     register: Good,

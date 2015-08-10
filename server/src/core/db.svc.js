@@ -1,5 +1,6 @@
 import redis from 'redis';
 import q from 'q';
+import { transformToArray } from './utils';
 
 class DbService {
 
@@ -26,8 +27,7 @@ class DbService {
                 deferred.resolve([]);
             }
             else {
-                let result = data.map((d) => JSON.parse(d));
-                deferred.resolve(result);
+                deferred.resolve(JSON.parse(data));
             }
         });
 

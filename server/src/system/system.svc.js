@@ -28,6 +28,7 @@ class SystemService extends DbService {
                 data: {
                     type: item.type,
                     operation: item.operation,
+                    item: Object.keys(item.data.result)[0],
                     status: item.data.result[Object.keys(item.data.result)],
                     date: item.data.date
                 }

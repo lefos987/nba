@@ -4,8 +4,8 @@ import SystemConsoleEntry from './system-console-entry';
 import SystemStore from '../../stores/system.store';
 import SystemActions from '../../actions/system.actions';
 
-let getConsoleState = () => ({
-    entries: SystemStore.getLogEntries()
+let getConsoleState = (type) => ({
+    entries: SystemStore.getLogEntries(type)
 });
 
 class SystemConsole extends React.Component {
@@ -32,7 +32,7 @@ class SystemConsole extends React.Component {
     }
 
     _onChange() {
-        this.setState(getConsoleState());
+        this.setState(getConsoleState(this.props.type));
     }
 
     render() {

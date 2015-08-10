@@ -38,8 +38,8 @@ class EventsService extends DbService{
     eventIdsForDate(date) {
 
         return this.getFromDb(this.key(date))
-            .then((response) => {
-                let events = response.data.event;
+            .then((result) => {
+                let events = result.event;
                 return events.map((event) => event.event_id);
             })
             .catch((err) => {
