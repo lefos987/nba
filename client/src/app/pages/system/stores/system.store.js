@@ -8,6 +8,12 @@ const CHANGE_EVENT = 'CHANGE_EVENT';
 let _entries = [];
 let _result = '';
 
+let _resetEntries = (type) => {
+    _.remove(_entries, (entry) => {
+        return entry.data.type === type;
+    });
+};
+
 class SystemStore extends EventEmitter {
 
     getLogEntries(type) {
@@ -16,12 +22,6 @@ class SystemStore extends EventEmitter {
 
     getResult() {
         return _result;
-    }
-    
-    resetEntries(type) {
-        _.remove(_entries, (entry) => {
-            return entry.data.type === type;
-        });
     }
 
     emitChange() {
@@ -47,12 +47,19 @@ NbaDispatcher.register((payload) => {
     switch (action.type) {
 
         case ACTION_TYPES.SYSTEM.GET_LOG_ENTRIES_RESPONSE:
-            _SystemStore.resetEntries(action.response.log.type);
+            _resetEntries(action.response.log.type);
             action.response.log.entries.forEach((entry) => {
                 _entries.push(entry);
             });
             _SystemStore.emitChange();
             break;
+        
+        case ACTION_TYPES.SYSTEM.SAVE_EVENTS_RESPONSE:
+        case ACTION_TYPES.SYSTEM.SAVE_BOXSCORES_RESPONSE:
+            _result = action.response.result;
+            _SystemStore.emitChange();
+            break;
+
     }
     return true;
 });

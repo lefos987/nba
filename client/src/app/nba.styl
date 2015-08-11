@@ -5,16 +5,27 @@
 
 @import './pages/system/_system';
 
+
 .system-command {
 
 	display: flex;
 	align-items: center;
 	padding: 25px;
 
-	.system-command-input
-	{
-		border: 0;
+	.system-command-input-wrapper {
+
+		flex: 1;
+		align-items: center;
 		width: 50%;
+		padding: 0 10px;
+		color: console-font-color;
+		background-color: console-bg;
+	}
+
+	.system-command-input {
+
+		border: 0;
+		flex: 3;
 		height: 40px;
 		padding-left:10px;
 		background-color: console-bg;
@@ -25,4 +36,12 @@
 			outline: none;
 		}
 	}
+
+	.spinner {
+
+		.double-bounce1 {
+			background: console-font-color;
+		}
+	}
+
 }

@@ -6,6 +6,9 @@
     var path        = require('path');
     var webpack     = require('webpack');
     var packageJson = require('../package.json');
+    var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+    var stylusLoader = ExtractTextPlugin.extract("style-loader", "css-loader!stylus-loader");
 
     var getVendorPackages = function () {
         var vendorPackages = [];
@@ -34,6 +37,14 @@
                     exlude: /(node_modules|bower_components)/,
                     loader: 'babel',
                     query: { compact: false }
+                },
+                {
+                    test: /\.styl$/,
+                    loader: stylusLoader
+                },
+                {
+                    test: /\.css$/,
+                    loader: stylusLoader
                 }
             ]
         },
@@ -45,7 +56,8 @@
             }
         },
         plugins: [
-            new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
+            new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+            new ExtractTextPlugin("[name].css")
         ]
     }
 })();

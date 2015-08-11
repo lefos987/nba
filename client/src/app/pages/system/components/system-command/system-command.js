@@ -1,4 +1,5 @@
 import React from 'react';
+import Spinner from 'react-spinkit';
 import SystemActions from '../../actions/system.actions';
 import SystemStore from '../../stores/system.store';
 
@@ -13,6 +14,7 @@ class SystemCommand extends React.Component {
         this._onKeyDown = this._onKeyDown.bind(this);
         this.state = {
             command: '',
+            loading: false,
             result: getResultState()
         };
     }
@@ -26,20 +28,30 @@ class SystemCommand extends React.Component {
     }
 
     _onChange(e) {
+
         this.setState({
             command: (e) ? e.target.value : '',
             result: getResultState()
         });
+
+        if (this.state.result) {
+            this.setState({
+                command: '',
+                loading: false
+            });
+        }
     }
     
     _onKeyDown(e) {
         if (e.keyCode === ENTER_KEY_CODE) {
-            let command = e.target.value;
+            let command = e.target.value.toLowerCase();
             switch(command) {
                 case 'update events':
+                    this.setState({ loading: true });
                     SystemActions.saveEvents();
                     break;
                 case 'update boxscores':
+                    this.setState({ loading: true });
                     SystemActions.saveBoxscores();
                     break;
                 default:
@@ -49,13 +61,18 @@ class SystemCommand extends React.Component {
     }
 
     render() {
+
         return (
             <div className="system-command column">
-                <input type="text" className="system-command-input"
-                       val={this.state.command}
-                       onKeyDown={this._onKeyDown}
-                       onChange={this._onChange}
-                    />
+                <div className="row system-command-input-wrapper">
+                    <input type="text"
+                           className="system-command-input"
+                           value={this.state.command}
+                           onKeyDown={this._onKeyDown}
+                           onChange={this._onChange}
+                        />
+                    { this.state.loading ? <Spinner spinnerName="double-bounce" noFadeIn/> : null }
+                </div>
                 <p>{this.state.result}</p>
             </div>
         );
