@@ -1,8 +1,41 @@
-console-bg="#CCC";
+console-bg = #333333;
+console-font-color = #00ff00;
 
 .console {
-	
+
 	flex: 1;
 	background: console-bg;
+	color: console-font-color;
+	font-family: Consolas, Menlo, Monaco, monospace;
+	padding: 10px;
 
+	.console-title {
+		font-weight: bold;
+		margin: 0 0 10px 0;
+		border-bottom: 1px dashed console-font-color;
+	}
+
+	.console-entries {
+
+		margin: 0;
+		padding: 0;
+
+		.console-entry {
+			list-style: none;
+			margin-bottom: 10px;
+
+			.console-entry-main-info {
+
+				margin: 0;
+				.console-entry-message {
+					margin-left: 10px;
+				}
+			}
+
+			.console-entry-secondary-info {
+				margin: 0;
+				font-style: italic;
+			}
+		}
+	}
 }

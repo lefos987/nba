@@ -3,32 +3,26 @@
 @import './components/layout/logo/_logo';
 @import './components/layout/menu/_menu';
 
-@import './pages/system/components/system-console/_system-console';
+@import './pages/system/_system';
 
-console-bg = #333333;
-console-font-color = #00ff00;
+.system-command {
 
-.console {
+	display: flex;
+	align-items: center;
+	padding: 25px;
 
-	flex: 1;
-	background: console-bg;
-	color: console-font-color;
-	font-family: Consolas, Menlo, Monaco, monospace;
+	.system-command-input
+	{
+		border: 0;
+		width: 50%;
+		height: 40px;
+		padding-left:10px;
+		background-color: console-bg;
+		color: console-font-color;
+		font-size: 24px;
 
-	.console-title {
-		font-weight: bold;
-		margin-bottom: 10px;
-		border-bottom: 1px dashed console-font-color;
-	}
-
-	.console-entries {
-
-		margin: 0;
-		padding: 0;
-
-		.console-entry {
-			list-style: none;
-
+		&:focus {
+			outline: none;
 		}
 	}
 }

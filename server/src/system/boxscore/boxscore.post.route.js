@@ -27,7 +27,6 @@ class BoxscoreRoute extends Route {
 
                     return dbResults.map((result) => {
 
-                        console.log('result ->', result);
                         let params = {
                             data: {
                                 result: result,
@@ -40,6 +39,12 @@ class BoxscoreRoute extends Route {
                     });
 
 
+                });
+            })
+
+            .then((saveLogEntriesResults) => {
+                q.all(saveLogEntriesResults).then((result) => {
+                    reply({ result });
                 });
             })
 

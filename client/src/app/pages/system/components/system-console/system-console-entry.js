@@ -38,12 +38,14 @@ class SystemConsoleEntry extends React.Component {
         let {message, status, item} = this._getLogEntryInfo(this.props.entry);
         return (
             <li className="console-entry">
-                <span>[{ logEntryDate }]</span>
-                <span>:</span>
-                <span>{ message }</span>
-                <span>|</span>
-                <span>{ status }</span>
-                <span>{ item }</span>
+                <p className="console-entry-main-info">
+                    <span className="console-entry-date">[{ logEntryDate }]</span>
+                    <span>:</span>
+                    <span className="console-entry-message">{ message }</span>
+                    <span>|</span>
+                    <span>{ status }</span>
+                </p>
+                <p className="console-entry-secondary-info">DB Key: { item }</p>
             </li>
         );
     }

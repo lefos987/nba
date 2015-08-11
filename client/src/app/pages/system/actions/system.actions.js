@@ -33,6 +33,7 @@ class SystemActions {
             err,
             response
         });
+        Api.getLogEntries('boxscores');
     }
 
     saveEvents() {
@@ -49,6 +50,7 @@ class SystemActions {
             err,
             response
         });
+        Api.getLogEntries('events');
     }
 }
 

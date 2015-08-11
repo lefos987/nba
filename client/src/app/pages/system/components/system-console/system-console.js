@@ -42,13 +42,11 @@ class SystemConsole extends React.Component {
         });
 
         return (
-            <div className="row">
-                <div className="console column">
-                    <h3 className="console-title">{this._getTitle()}</h3>
-                    <ul className="console-entries">
-                        {entries}
-                    </ul>
-                </div>
+            <div className="console">
+                <h3 className="console-title">{this._getTitle()}</h3>
+                <ul className="console-entries">
+                    {entries}
+                </ul>
             </div>
         );
     }
