@@ -20,5 +20,6 @@ export const INTERNAL_API = {
     system: {
         events: '/api/v1/system/events',
         boxscores: '/api/v1/system/boxscores'
-    }
+    },
+    schedule: '/api/v1/schedule'
 };
