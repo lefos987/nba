@@ -6,6 +6,7 @@ import { ACTION_TYPES } from '../../../constants/nba.constants';
 const CHANGE_EVENT = 'CHANGE_EVENT';
 
 let _entries = [];
+let _command = '';
 let _result = '';
 
 let _resetEntries = (type) => {
@@ -18,6 +19,10 @@ class SystemStore extends EventEmitter {
 
     getLogEntries(type) {
         return _entries.filter((entry) => (entry.data.type === type));
+    }
+
+    getCommand() {
+        return _command;
     }
 
     getResult() {
@@ -56,7 +61,11 @@ NbaDispatcher.register((payload) => {
         
         case ACTION_TYPES.SYSTEM.SAVE_EVENTS_RESPONSE:
         case ACTION_TYPES.SYSTEM.SAVE_BOXSCORES_RESPONSE:
-            _result = action.response.result;
+
+            _result = (action.response) ?
+                { success: true, error: null } :
+                { success: false, error: action.err.response.body.message};
+            _command = '';
             _SystemStore.emitChange();
             break;
 

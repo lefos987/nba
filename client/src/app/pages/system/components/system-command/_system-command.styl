@@ -1,4 +1,46 @@
 .system-command {
 
-	background: pink;
+	display: flex;
+	align-items: center;
+	padding: 25px;
+
+	.system-command-input-wrapper {
+
+		flex: 1;
+		align-items: center;
+		width: 50%;
+		padding: 0 10px;
+		color: console-font-color;
+		background-color: console-bg;
+		font-family: console-font-family;
+	}
+
+	.system-command-input {
+
+
+		flex: 3;
+		height: 40px;
+		border: 0;
+		padding-left: 10px;
+		font-size: 24px;
+		background-color: console-bg;
+		color: console-font-color;
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	.system-command-input-error {
+		background: console-bg;
+		color: red;
+		margin: 0;
+	}
+
+	.spinner {
+
+		.double-bounce1 {
+			background: console-font-color;
+		}
+	}
 }

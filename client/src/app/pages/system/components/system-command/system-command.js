@@ -5,6 +5,7 @@ import SystemStore from '../../stores/system.store';
 
 let ENTER_KEY_CODE = 13;
 let getResultState = () => SystemStore.getResult();
+let getCommandState = () => SystemStore.getCommand();
 
 class SystemCommand extends React.Component {
 
@@ -13,7 +14,7 @@ class SystemCommand extends React.Component {
         this._onChange  = this._onChange.bind(this);
         this._onKeyDown = this._onKeyDown.bind(this);
         this.state = {
-            command: '',
+            command: getCommandState(),
             loading: false,
             result: getResultState()
         };
@@ -30,16 +31,11 @@ class SystemCommand extends React.Component {
     _onChange(e) {
 
         this.setState({
-            command: (e) ? e.target.value : '',
-            result: getResultState()
+            command: (e) ? e.target.value : getCommandState(),
+            result: getResultState(),
+            loading: false
         });
 
-        if (this.state.result) {
-            this.setState({
-                command: '',
-                loading: false
-            });
-        }
     }
     
     _onKeyDown(e) {
@@ -55,7 +51,10 @@ class SystemCommand extends React.Component {
                     SystemActions.saveBoxscores();
                     break;
                 default:
-                    this.setState({ result: 'Error! This command is not supported!'});
+                    this.setState({ result: {
+                        success: false,
+                        error: 'Error! This command is not supported!'
+                    }});
             }
         }
     }
@@ -73,7 +72,11 @@ class SystemCommand extends React.Component {
                         />
                     { this.state.loading ? <Spinner spinnerName="double-bounce" noFadeIn/> : null }
                 </div>
-                <p>{this.state.result}</p>
+                <div className="system-command-input-wrapper">
+                    {!this.state.result.success ?
+                    <p className="system-command-input-error">{this.state.result.error}</p>
+                        : null }
+                </div>
             </div>
         );
     }
