@@ -8,6 +8,7 @@ import EventsPostRoute from './system/events/events.post.route';
 import BoxscoreGetRoute from './system/boxscore/boxscore.get.route';
 import BoxscorePostRoute from './system/boxscore/boxscore.post.route';
 
+import SystemService from './system/system.svc';
 
 var server = new Hapi.Server();
 
@@ -41,6 +42,8 @@ server.register({
         throw err;
     }
 });
+
+SystemService.scheduleUpdateTasks();
 
 server.start(() => {
     console.log('* Server running at :', server.info.uri);

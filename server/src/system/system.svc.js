@@ -1,4 +1,7 @@
 import moment from 'moment';
+import request from 'superagent';
+import { CronJob } from 'cron';
+import { INTERNAL_API } from '../constants/constants';
 import DbService from '../core/db.svc';
 
 class SystemService extends DbService {
@@ -35,6 +38,33 @@ class SystemService extends DbService {
             }));
             
         });
+    }
+
+    scheduleUpdateTasks() {
+
+        let job = new CronJob('00 00-59 12-13 * * *', () => {
+
+            request
+                .post(INTERNAL_API.host + INTERNAL_API.system.events)
+                .end((err, events) => {
+
+                    if (events) {
+
+                        request
+                            .post(INTERNAL_API.host + INTERNAL_API.system.boxscores)
+                            .end((err, boxscores) => {
+
+                                if (boxscores) {
+                                    job.stop();
+                                }
+                            });
+                    }
+                });
+        }, () => {
+            console.log('* job done! *');
+        });
+        job.start();
+
     }
 }
 

@@ -46,9 +46,7 @@ class BoxscoreService extends DbService{
                 let promises = [];
 
                 let lefos = [
-                    requestQueue[0],
-                    requestQueue[1],
-                    requestQueue[2]
+                    requestQueue[0]
                 ];
                 lefos.forEach((request, index) => {
                     let send = request.send.bind(request);

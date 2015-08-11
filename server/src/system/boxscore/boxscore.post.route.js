@@ -35,7 +35,7 @@ class BoxscoreRoute extends Route {
                             type: 'boxscores',
                             operation: 'insert'
                         };
-                        SystemService.saveToListOfDb(SystemService.key('boxscores'), SystemService.createLogEntry(params));
+                        return SystemService.saveToListOfDb(SystemService.key('boxscores'), SystemService.createLogEntry(params));
                     });
 
 
