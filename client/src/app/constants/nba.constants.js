@@ -1,8 +1,11 @@
+export const HOST = 'http://localhost:3000';
+
 export const API_ENDPOINTS = {
     SYSTEM: {
         EVENTS: '/api/v1/system/events',
         BOXSCORES: '/api/v1/system/boxscores'
-    }
+    },
+    SCHEDULE: '/api/v1/schedule'
 };
 
 export const PAYLOAD_SOURCES = {
@@ -18,5 +21,9 @@ export const ACTION_TYPES = {
         SAVE_BOXSCORES_RESPONSE: 'SAVE_BOXSCORES_RESPONSE',
         SAVE_EVENTS: 'SAVE_EVENTS',
         SAVE_EVENTS_RESPONSE: 'SAVE_EVENTS_RESPONSE'
+    },
+    SCHEDULE: {
+        GET_SCHEDULE: 'GET_SCHEDULE',
+        GET_SCHEDULE_RESPONSE: 'GET_SCHEDULE_RESPONSE'
     }
 };

@@ -14,7 +14,7 @@ class Header extends React.Component {
                 alt: 'NBA_LOGO'
             },
             menuItems: [
-                { key: 1, to: 'home', label: 'Home' },
+                { key: 1, to: 'schedule', label: 'Schedule' },
                 { key: 2, to: 'system', label: 'System' }
             ]
         };

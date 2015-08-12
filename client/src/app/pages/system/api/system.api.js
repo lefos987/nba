@@ -1,9 +1,7 @@
 import request from 'superagent';
 
-import { API_ENDPOINTS } from '../../../constants/nba.constants';
+import { API_ENDPOINTS, HOST } from '../../../constants/nba.constants';
 import SystemActions from '../actions/system.actions';
-
-const HOST = 'http://localhost:3000';
 
 let Api = {
 
