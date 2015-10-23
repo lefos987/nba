@@ -1,4 +1,4 @@
-const XML_STATS_API_KEY    = '8d2b5e51-b1f6-4605-90d2-5473f4f4d1b7';
+const XML_STATS_API_KEY    = 'b82ed8df-bb50-476f-a354-2b4418202b76';
 const XML_STATS_USER_AGENT = 'elparask@gmail.com';
 
 export const XML_STATS_API = {
