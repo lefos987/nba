@@ -18,4 +18,4 @@ export let transformToArray = (obj) => {
         return [obj];
     }
     return obj;
-}
+};

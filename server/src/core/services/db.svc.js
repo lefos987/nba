@@ -1,6 +1,6 @@
 import redis from 'redis';
 import q from 'q';
-import { transformToArray } from './utils';
+import { transformToArray } from './utils.svc';
 
 class DbService {
 

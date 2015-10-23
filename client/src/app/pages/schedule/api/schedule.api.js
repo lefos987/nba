@@ -12,7 +12,7 @@ let Api = {
             .query({ date })
             .end((err, res) => {
                 if (err) {
-                    ScheduleActions.getScheduleRespnse(err);
+                    ScheduleActions.getScheduleResponse(err);
                 }
                 else {
                     let data = JSON.parse(res.text);

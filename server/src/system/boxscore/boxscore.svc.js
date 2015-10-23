@@ -1,9 +1,9 @@
 import q from 'q';
 import { XML_STATS_API } from '../../constants/constants';
-import { delay } from '../../core/utils';
-import DbService from '../../core/db.svc';
-import Request from '../../core/request';
-import RequestQueue from '../../core/requestQueue.svc';
+import { delay } from '../../core/services/utils.svc';
+import DbService from '../../core/services/db.svc';
+import Request from '../../core/models/request';
+import RequestQueue from '../../core/services/requestQueue.svc';
 import EventsService from '../events/events.svc';
 
 class BoxscoreService extends DbService{
@@ -43,12 +43,10 @@ class BoxscoreService extends DbService{
         return this._addBoxscoreRequestsToQueue(date)
 
             .then((requestQueue) => {
+
                 let promises = [];
 
-                let lefos = [
-                    requestQueue[0]
-                ];
-                lefos.forEach((request, index) => {
+                requestQueue.forEach((request, index) => {
                     let send = request.send.bind(request);
                     let successHandler = (data) => ({
                         eventId: request.endpoint.split('.')[0],

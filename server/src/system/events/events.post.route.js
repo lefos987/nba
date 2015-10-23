@@ -1,9 +1,9 @@
 import Boom from 'boom';
 import q from 'q';
 
-import Route from '../../core/route';
+import Route from '../../core/models/route';
 import { INTERNAL_API } from '../../constants/constants';
-import { transformToArray } from '../../core/utils';
+import { transformToArray } from '../../core/services/utils.svc';
 import SystemService from '../system.svc';
 import EventsService from './events.svc';
 

@@ -2,7 +2,7 @@ import moment from 'moment';
 import request from 'superagent';
 import { CronJob } from 'cron';
 import { INTERNAL_API } from '../constants/constants';
-import DbService from '../core/db.svc';
+import DbService from '../core/services/db.svc';
 
 class SystemService extends DbService {
 

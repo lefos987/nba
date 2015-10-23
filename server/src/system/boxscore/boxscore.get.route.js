@@ -1,6 +1,6 @@
 import Boom from 'boom';
 
-import Route from '../../core/route';
+import Route from '../../core/models/route';
 import { INTERNAL_API } from '../../constants/constants';
 import SystemService from '../system.svc';
 

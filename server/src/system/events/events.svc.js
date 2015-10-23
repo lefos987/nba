@@ -1,7 +1,7 @@
-import DbService from '../../core/db.svc';
-import Request from '../../core/request';
+import DbService from '../../core/services/db.svc';
+import Request from '../../core/models/request';
 import { XML_STATS_API } from '../../constants/constants';
-import { formatDate } from '../../core/utils';
+import { formatDate } from '../../core/services/utils.svc';
 
 class EventsService extends DbService{
 

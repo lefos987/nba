@@ -30,7 +30,10 @@ class SchedulePage extends React.Component {
     render() {
 
         let scheduleItems = (this.state.schedule) ? this.state.schedule.map((scheduleItem) => {
-            return <li key={scheduleItem.id}>{scheduleItem.awayTeam} @ {scheduleItem.homeTeam}</li>;
+            return <li key={scheduleItem.id}>
+                    <span>{scheduleItem.awayTeam} @ {scheduleItem.homeTeam}</span>
+                    <span>{scheduleItem.rating}</span>
+                </li>;
         }) : [];
 
         return (

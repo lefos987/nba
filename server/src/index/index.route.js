@@ -1,4 +1,4 @@
-import Route from '../core/route';
+import Route from '../core/models/route';
 
 class IndexRoute extends Route {
 
