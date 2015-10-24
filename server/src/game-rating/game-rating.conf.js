@@ -49,5 +49,5 @@ export const periodScoresRatingCategories = [
 ];
 
 export const overtimeRating = {
-    rating: 20
+    rating: 10
 };

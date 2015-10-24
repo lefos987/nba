@@ -28,15 +28,16 @@ class GameRatingService {
     }
 
     _ratePeriodScores(game) {
-        let homeScoresPerPeriod = game.homeTeamPeriodScores;
-        let awayScoresPerPeriod = game.awayTeamPeriodScores;
+
+        let homePointsPerPeriod = this._teamScorePerPeriod(game.homeTeamPeriodScores);
+        let awayPointsPerPeriod = this._teamScorePerPeriod(game.awayTeamPeriodScores);
         let scoresDiff = [];
         
-        if (homeScoresPerPeriod.length === awayScoresPerPeriod.length) {
+        if (homePointsPerPeriod.length === awayPointsPerPeriod.length) {
 
-            for (var p=0; p < homeScoresPerPeriod.length; p ++) {
+            for (var p=0; p < homePointsPerPeriod.length; p ++) {
 
-                scoresDiff[p] = Math.abs(homeScoresPerPeriod[p] - awayScoresPerPeriod[p]);
+                scoresDiff[p] = Math.abs(homePointsPerPeriod[p] - awayPointsPerPeriod[p]);
 
                 let period = p + 1;
 
@@ -48,7 +49,22 @@ class GameRatingService {
 
             }
         }
+    }
 
+    _teamScorePerPeriod(pointsPerPeriod) {
+
+        var scorePerPeriod = [];
+
+        for (let i=0; i < pointsPerPeriod.length; i++) {
+
+            let s = 0;
+
+            for (let j=0; j < scorePerPeriod.length; j++) {
+                s += pointsPerPeriod[j];
+            }
+            scorePerPeriod[i] = s + pointsPerPeriod[i];
+        }
+        return scorePerPeriod;
     }
 }
 
