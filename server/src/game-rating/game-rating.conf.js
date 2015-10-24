@@ -1,23 +1,50 @@
 export const finalScoreRatingCategories = [
     {
-        condition: (val) => val < 5,
+        condition: (scoreDiff) => scoreDiff <= 3,
         rating: 10
     },
     {
-        condition: (val) => val <= 10,
+        condition: (scoreDiff) => (scoreDiff > 3 && scoreDiff <=9),
         rating: 5
     },
     {
-        condition: (val) => val <= 15,
+        condition: (scoreDiff) => (scoreDiff > 9 && scoreDiff <= 15),
         rating: 0
     },
     {
-        condition: (val) => val > 15 && (val <= 20),
+        condition: (scoreDiff) => (scoreDiff > 15 && scoreDiff <= 21),
         rating: -5
     },
     {
-        condition: (val) => val > 20,
+        condition: (scoreDiff) => scoreDiff > 21,
         rating: -10
+    }
+];
+
+export const periodScoresRatingCategories = [
+    {
+        condition: (period, scoreDiff) => (period === 1 && scoreDiff <= 6),
+        rating: 5
+    },
+    {
+        condition: (period, scoreDiff) => (period === 1 && scoreDiff > 15),
+        rating: -5
+    },
+    {
+        condition: (period, scoreDiff) => (period === 2 && scoreDiff <= 6),
+        rating: 5
+    },
+    {
+        condition: (period, scoreDiff) => (period === 2 && scoreDiff > 15),
+        rating: -5
+    },
+    {
+        condition: (period, scoreDiff) => (period === 3 && scoreDiff < 6),
+        rating: 5
+    },
+    {
+        condition: (period, scoreDiff) => (period === 3 && scoreDiff > 15),
+        rating: -5
     }
 ];
 

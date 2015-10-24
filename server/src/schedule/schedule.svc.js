@@ -17,7 +17,9 @@ class ScheduleService extends DbService {
 
                     let game = new Game(event);
 
-                    GameRatingService.rateGame(game, 0);
+                    console.log('game ->', game);
+                    GameRatingService.rateGame(game);
+                    console.log('game.rating ->', game.rating);
 
                     return {
                         id: game.id,

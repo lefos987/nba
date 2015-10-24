@@ -1,19 +1,20 @@
 import {
     finalScoreRatingCategories,
-    overtimeRating
+    overtimeRating,
+    periodScoresRatingCategories
 } from './game-rating.conf';
-
-const GAME_PERIODS = 4;
 
 class GameRatingService {
 
     rateGame(game) {
         this._rateFinalScore(game);
         this._rateOvertime(game);
+        this._ratePeriodScores(game);
     }
 
     _rateFinalScore(game) {
         let scoreDiff = Math.abs(game.homeTeamPoints - game.awayTeamPoints);
+
         finalScoreRatingCategories.forEach((category) => {
             if (category.condition(scoreDiff)) {
                 game.rating += category.rating;
@@ -22,11 +23,31 @@ class GameRatingService {
     }
 
     _rateOvertime(game) {
-        let hasOvertime = game.homeTeamPeriodScores.length > GAME_PERIODS;
+        let hasOvertime = game.hasOvertime;
         game.rating = (hasOvertime) ? game.rating + overtimeRating.rating : game.rating;
     }
 
-    _ratePeriodScores(game, rating) {
+    _ratePeriodScores(game) {
+        let homeScoresPerPeriod = game.homeTeamPeriodScores;
+        let awayScoresPerPeriod = game.awayTeamPeriodScores;
+        let scoresDiff = [];
+        
+        if (homeScoresPerPeriod.length === awayScoresPerPeriod.length) {
+
+            for (var p=0; p < homeScoresPerPeriod.length; p ++) {
+
+                scoresDiff[p] = Math.abs(homeScoresPerPeriod[p] - awayScoresPerPeriod[p]);
+
+                let period = p + 1;
+
+                periodScoresRatingCategories.forEach((category) => {
+                    if (category.condition(period, scoresDiff[p])) {
+                        game.rating += category.rating;
+                    }
+                });
+
+            }
+        }
 
     }
 }

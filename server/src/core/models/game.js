@@ -1,3 +1,5 @@
+const REGULAR_TIME_PERIODS = 4;
+
 class Game {
 
     constructor(params = {}) {
@@ -16,32 +18,22 @@ class Game {
             periods: params.away_period_scores
         };
 
-        this.rating = params.rating || null;
+        this.rating = params.rating || 0;
     }
 
-    get homeTeamName() {
-        return this.homeTeam.name;
-    }
+    get homeTeamName() { return this.homeTeam.name; }
 
-    get homeTeamPoints() {
-        return this.homeTeam.points;
-    }
+    get homeTeamPoints() { return this.homeTeam.points; }
 
-    get homeTeamPeriodScores() {
-        return this.homeTeam.periods;
-    }
+    get homeTeamPeriodScores() { return this.homeTeam.periods; }
 
-    get awayTeamName() {
-        return this.awayTeam.name;
-    }
+    get awayTeamName() { return this.awayTeam.name; }
 
-    get awayTeamPoints() {
-        return this.awayTeam.points;
-    }
+    get awayTeamPoints() { return this.awayTeam.points; }
 
-    get awayTeamPeriodScores() {
-        return this.awayTeam.periods;
-    }
+    get awayTeamPeriodScores() { return this.awayTeam.periods }
+
+    get hasOvertime() { return this.homeTeam.periods.length > REGULAR_TIME_PERIODS; }
 }
 
 export default Game;
