@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import {formatDate} from '../../../common/utils';
+import { formatDate } from '../../../common/utils';
 import NbaDispatcher from '../../../dispatcher/nba.dispatcher';
 import { ACTION_TYPES } from '../../../constants/nba.constants';
 

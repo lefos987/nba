@@ -7,7 +7,8 @@ class ScheduleService extends DbService {
 
     constructSchedule(date) {
 
-        console.log('date ->', date);
+        let schedule = null;
+
         return this.getFromDb('events_' + date)
 
             .then((data) => {
@@ -16,7 +17,7 @@ class ScheduleService extends DbService {
 
                     let events = data.event;
 
-                    let schedule = events.map((event) => {
+                    schedule = events.map((event) => {
 
                         let game = new Game(event);
 
@@ -30,16 +31,15 @@ class ScheduleService extends DbService {
                         }
                     });
 
-                    console.log('schedule ->', schedule);
-
-                    return {
-                        schedule
-                    }
                 }
 
                 else if (data && data.length === 0) {
-                    schedule: []
+                    schedule = [];
                 }
+
+                return {
+                    schedule
+                };
 
             });
     }
