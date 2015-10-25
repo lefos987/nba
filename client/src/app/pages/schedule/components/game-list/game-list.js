@@ -5,7 +5,8 @@ import ScheduleActions from '../../actions/schedule.actions';
 
 
 let getScheduleState = () => ({
-    schedule: ScheduleStore.getSchedule()
+    schedule: ScheduleStore.getSchedule(),
+    selectedDate: ScheduleStore.getSelectedDate()
 });
 
 class GameList extends React.Component {
@@ -18,7 +19,7 @@ class GameList extends React.Component {
 
     componentDidMount() {
         ScheduleStore.addChangeListener(this._onChange);
-        ScheduleActions.getSchedule('20141225');
+        ScheduleActions.getSchedule(this.state.selectedDate);
     }
 
     componentWillUnmount() {

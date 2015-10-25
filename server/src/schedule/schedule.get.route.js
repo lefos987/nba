@@ -1,3 +1,4 @@
+import Boom from 'boom';
 import Route from '../core/models/route';
 import { INTERNAL_API } from '../constants/constants';
 import ScheduleService from './schedule.svc';
@@ -10,10 +11,15 @@ class ScheduleGetRoute extends Route {
 
     handler(request, reply) {
 
+        let date = request.query.date;
+
         ScheduleService
-            .constructSchedule('20141225')
+            .constructSchedule(date)
             .then((schedule) => {
                 reply(schedule);
+            })
+            .catch((error) => {
+                reply(Boom.wrap(new Error(error)));
             });
     }
 }

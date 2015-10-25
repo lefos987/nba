@@ -18,6 +18,14 @@ class ScheduleActions {
             response
         });
     }
+
+    setScheduleDate(date) {
+        NbaDispatcher.handleViewAction({
+            type: ACTION_TYPES.SCHEDULE.SET_DATE,
+            date
+        });
+        Api.getSchedule(date);
+    }
 }
 
 let _ScheduleActions = new ScheduleActions();
