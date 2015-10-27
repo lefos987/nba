@@ -1,12 +1,12 @@
+import moment from 'moment';
 import { EventEmitter } from 'events';
-import { formatDate } from '../../../common/utils';
 import NbaDispatcher from '../../../dispatcher/nba.dispatcher';
 import { ACTION_TYPES } from '../../../constants/nba.constants';
 
 const CHANGE_EVENT = 'CHANGE_EVENT';
 
 let _schedule = [];
-let _selectedDate = formatDate(new Date(), 'YYYYMMDD');
+let _selectedDate = moment(new Date());
 
 class ScheduleStore extends EventEmitter {
 

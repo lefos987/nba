@@ -2,10 +2,13 @@ import request from 'superagent';
 
 import { API_ENDPOINTS, HOST } from '../../../constants/nba.constants';
 import ScheduleActions from '../actions/schedule.actions';
+import { formatDate } from '../../../common/utils';
 
 let Api = {
 
     getSchedule(date) {
+
+        date = formatDate(date, 'YYYYMMDD');
 
         request
             .get(HOST + API_ENDPOINTS.SCHEDULE)

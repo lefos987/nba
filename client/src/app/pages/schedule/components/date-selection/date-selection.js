@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import ScheduleStore from '../../stores/schedule.store';
 import ScheduleActions from '../../actions/schedule.actions';
 
@@ -16,20 +17,28 @@ class DateSelection extends React.Component {
     }
 
     _nextDate () {
-        ScheduleActions.setScheduleDate('20141225');
+        let nextDate = moment(this.state.selectedDate).add(1, 'days');
+        this.setState({
+            selectedDate: nextDate
+        });
+        ScheduleActions.setScheduleDate(nextDate);
     }
 
     _previousDate () {
-        ScheduleActions.setScheduleDate('20141224');
+        let previousDate = moment(this.state.selectedDate).subtract(1, 'days');
+        this.setState({
+            selectedDate: previousDate
+        });
+        ScheduleActions.setScheduleDate(previousDate);
     }
 
     render() {
 
         return (
             <div className="date-selection row">
-                <button onClick={this._nextDate}>Next</button>
-                <p></p>
                 <button onClick={this._previousDate}>Previous</button>
+                <p>{this.state.selectedDate.format('DD/MM/YYYY')}</p>
+                <button onClick={this._nextDate}>Next</button>
             </div>
         );
     }
