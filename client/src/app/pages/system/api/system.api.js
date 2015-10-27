@@ -26,7 +26,12 @@ let Api = {
 
     saveBoxscores() {
         request
-            .post(HOST + API_ENDPOINTS.SYSTEM.BOXSCORES)
+            .post(HOST + API_ENDPOINTS.SYSTEM.BOXSCORES, {
+                body: {
+                    date: new Date()
+                },
+                json: true
+            })
             .end((err, res) => {
                 if(err) {
                     SystemActions.saveBoxscoresResponse(err);
@@ -40,7 +45,12 @@ let Api = {
 
     saveEvents() {
         request
-            .post(HOST + API_ENDPOINTS.SYSTEM.EVENTS)
+            .post(HOST + API_ENDPOINTS.SYSTEM.EVENTS, {
+                body: {
+                    date: new Date()
+                },
+                json: true
+            })
             .end((err, res) => {
                 if(err) {
                     SystemActions.saveEventsResponse(err);

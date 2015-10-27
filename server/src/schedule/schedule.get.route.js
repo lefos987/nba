@@ -1,5 +1,6 @@
 import Boom from 'boom';
 import Route from '../core/models/route';
+import Response from '../core/models/response';
 import { INTERNAL_API } from '../constants/constants';
 import ScheduleService from './schedule.svc';
 
@@ -12,14 +13,26 @@ class ScheduleGetRoute extends Route {
     handler(request, reply) {
 
         let date = request.query.date;
+        let response = {};
 
         ScheduleService
+
             .constructSchedule(date)
+
             .then((schedule) => {
-                reply(schedule);
+                response = {
+                    success: true,
+                    data: schedule
+                };
+                reply(new Response(response));
             })
+
             .catch((error) => {
-                reply(Boom.wrap(new Error(error)));
+                response = {
+                    success: false,
+                    data: Boom.wrap(new Error(error))
+                };
+                reply(new Response(response));
             });
     }
 }
