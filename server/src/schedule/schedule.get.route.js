@@ -12,7 +12,6 @@ class ScheduleGetRoute extends Route {
     handler(request, reply) {
 
         let date = request.query.date;
-        let response = {};
 
         ScheduleService
 
