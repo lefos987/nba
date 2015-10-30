@@ -1,11 +1,13 @@
 import React from 'react';
 import { capitalize } from '../../../../common/utils';
 import SystemConsoleEntry from './system-console-entry';
+import SystemConsoleError from './system-console-error';
 import SystemStore from '../../stores/system.store';
 import SystemActions from '../../actions/system.actions';
 
 let getConsoleState = (type) => ({
-    entries: SystemStore.getLogEntries(type)
+    entries: SystemStore.getLogEntries(type),
+    errors: SystemStore.getErrors(type)
 });
 
 class SystemConsole extends React.Component {
@@ -41,10 +43,15 @@ class SystemConsole extends React.Component {
             return <SystemConsoleEntry key={index} entry={entry} />;
         });
 
+        let errors = this.state.errors.map((error, index) => {
+            return <SystemConsoleError key={index} error={error} />;
+        });
+
         return (
             <div className="console">
                 <h3 className="console-title">{this._getTitle()}</h3>
                 <ul className="console-entries">
+                    {errors}
                     {entries}
                 </ul>
             </div>

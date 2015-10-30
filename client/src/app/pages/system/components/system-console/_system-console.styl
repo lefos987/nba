@@ -1,5 +1,6 @@
 console-bg = #333333;
 console-font-color = #00ff00;
+console-error-color = red;
 console-font-family = Consolas, Menlo, Monaco, monospace;
 
 .console {
@@ -27,9 +28,14 @@ console-font-family = Consolas, Menlo, Monaco, monospace;
 			list-style: none;
 			margin-bottom: 10px;
 
+			&.error {
+				color: console-error-color;
+			}
+
 			.console-entry-main-info {
 
 				margin: 0;
+
 				.console-entry-message {
 					margin-left: 10px;
 				}

@@ -1,11 +1,13 @@
 import { EventEmitter } from 'events';
 import _ from 'lodash';
+import NbaError from '../../../common/error.mdl';
 import NbaDispatcher from '../../../dispatcher/nba.dispatcher';
 import { ACTION_TYPES } from '../../../constants/nba.constants';
 
 const CHANGE_EVENT = 'CHANGE_EVENT';
 
 let _entries = [];
+let _errors = [];
 let _command = '';
 let _result = '';
 
@@ -19,6 +21,10 @@ class SystemStore extends EventEmitter {
 
     getLogEntries(type) {
         return _entries.filter((entry) => (entry.data.type === type));
+    }
+
+    getErrors(type) {
+        return _errors.filter((error) => (error.body.type === type));
     }
 
     getCommand() {
@@ -52,10 +58,15 @@ NbaDispatcher.register((payload) => {
     switch (action.type) {
 
         case ACTION_TYPES.SYSTEM.GET_LOG_ENTRIES_RESPONSE:
-            _resetEntries(action.response.log.type);
-            action.response.log.entries.forEach((entry) => {
-                _entries.push(entry);
-            });
+            if (action.err) {
+                _errors.push(new NbaError(action.err));
+            }
+            else {
+                _resetEntries(action.response.log.type);
+                action.response.log.entries.forEach((entry) => {
+                    _entries.push(entry);
+                });
+            }
             _SystemStore.emitChange();
             break;
         

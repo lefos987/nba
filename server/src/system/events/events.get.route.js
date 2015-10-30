@@ -27,18 +27,15 @@ class EventsGetRoute extends Route {
                             entries
                         }
                     }
-                };
-                reply(new Response(response));
+                });
             })
 
-            .catch((error) => {
-
-                response = {
-                    success: false,
-                    data: Boom.wrap(new Error(error))
-                };
-
-                reply(new Response(response));
+            .catch((err) => {
+                let error = Boom.create(500, err, { type: 'events' });
+                error.reformat();
+                error.output.payload.type = 'events';
+                error.output.payload.date = new Date();
+                reply(error);
             });
     }
 }
