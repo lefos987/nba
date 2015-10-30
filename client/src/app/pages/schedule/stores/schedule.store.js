@@ -4,9 +4,11 @@ import NbaDispatcher from '../../../dispatcher/nba.dispatcher';
 import { ACTION_TYPES } from '../../../constants/nba.constants';
 
 const CHANGE_EVENT = 'CHANGE_EVENT';
+const YESTERDAY = moment().subtract(1, 'days');
 
 let _schedule = [];
-let _selectedDate = moment(new Date());
+
+let _selectedDate = YESTERDAY;
 
 class ScheduleStore extends EventEmitter {
 

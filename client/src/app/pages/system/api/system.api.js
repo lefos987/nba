@@ -1,7 +1,10 @@
 import request from 'superagent';
+import moment from 'moment';
 
 import { API_ENDPOINTS, HOST } from '../../../constants/nba.constants';
 import SystemActions from '../actions/system.actions';
+
+const yesterday = moment().subtract(1, 'days');
 
 let Api = {
 
@@ -28,7 +31,7 @@ let Api = {
         request
             .post(HOST + API_ENDPOINTS.SYSTEM.BOXSCORES, {
                 body: {
-                    date: new Date()
+                    date: yesterday
                 },
                 json: true
             })
@@ -44,10 +47,11 @@ let Api = {
     },
 
     saveEvents() {
+        console.log('yesterday ->', yesterday);
         request
             .post(HOST + API_ENDPOINTS.SYSTEM.EVENTS, {
                 body: {
-                    date: new Date()
+                    date: yesterday
                 },
                 json: true
             })

@@ -13,7 +13,7 @@ class BoxscoreRoute extends Route {
 
     handler(request, reply) {
 
-        let date = request.payload.date;
+        let date = request.payload.body.date;
         
         BoxscoreService.getBoxscoresFromApi(date)
 
@@ -30,7 +30,7 @@ class BoxscoreRoute extends Route {
 
                         let params = {
                             data: {
-                                result: result,
+                                result,
                                 date
                             },
                             type: 'boxscores',

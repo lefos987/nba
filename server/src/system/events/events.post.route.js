@@ -15,7 +15,7 @@ class EventsPostRoute extends Route {
 
     handler(request, reply) {
 
-        let date = request.payload.date;
+        let date = request.payload.body.date;
 
         //1. We make a call to XML_Stats API to get the events for a specific date
         EventsService.getEventsFromApi(date)
