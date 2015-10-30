@@ -1,3 +1,4 @@
+import Boom from 'boom';
 import moment from 'moment';
 import request from 'superagent';
 import { CronJob } from 'cron';
@@ -20,7 +21,31 @@ class SystemService extends DbService {
         };
     }
 
-    getSystemLogEntriesOfType(type) {
+    createSystemLogEntriesReply(type, replyFn) {
+
+        this._getSystemLogEntriesOfType(type)
+
+            .then((entries) => {
+
+                let response = {
+                    log: {
+                        type,
+                        entries
+                    }
+                };
+                replyFn(response);
+            })
+
+            .catch((err) => {
+                let error = Boom.create(500, err, { type });
+                error.reformat();
+                error.output.payload.type = type;
+                error.output.payload.date = new Date();
+                replyFn(error);
+            });
+    }
+
+    _getSystemLogEntriesOfType(type) {
 
         let list = this.key(type);
 
