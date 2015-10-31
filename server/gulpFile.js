@@ -49,4 +49,7 @@
     define('develop', 'perform required tasks during development');
     gulp.task('develop', ['serve']);
 
+    define('build', 'perform server build');
+    gulp.task('build', ['webpack:bundle']);
+
 }());

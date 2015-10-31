@@ -1,0 +1,2 @@
+install: ./configure.sh,
+script: ./build.sh
