@@ -46,7 +46,7 @@ server.register({
     }
 });
 
-//SystemService.scheduleUpdateTasks();
+SystemService.scheduleUpdateTasks();
 
 server.start(() => {
     console.log('* Server running at :', server.info.uri);
