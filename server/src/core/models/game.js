@@ -26,7 +26,6 @@ class Game {
     }
 
     _findTeamLogo(teamId) {
-        console.log('teamId ->', teamId);
         return TEAM_LOGOS[teamId];
     }
 

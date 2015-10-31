@@ -47,7 +47,7 @@ let Api = {
     },
 
     saveEvents() {
-        console.log('yesterday ->', yesterday);
+
         request
             .post(HOST + API_ENDPOINTS.SYSTEM.EVENTS, {
                 body: {

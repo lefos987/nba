@@ -10,8 +10,7 @@ module.exports = function (gulp, config, definitionFn) {
                 js: 'node'
             },
             script: config.dirs.dist.root + config.name + '.js',
-            ignore: ['*'],
-            watch: ['foo/']
+            ignore: ['*']
         }).on('restart', function () {
             console.log('* Restart *');
         });
