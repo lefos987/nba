@@ -1,2 +1,6 @@
-install: ./configure.sh
-script: ./build.sh
+install: "./configure.sh"
+script: "./build.sh"
+deploy:
+  provider: heroku
+  api_key:
+    secure: TOhF1O3ZLFGuEsYFRxZST5kJ7smwVfnspFFfyCPKU72Jq0IMNfmrjdTZYtJ9+DAA2Nl2Y4/MkRMWbHlGqiLGgfS6LXVkdd031IOjQDYXMvsecyQbX687Vk5e3OK35LPtXeLLdeI+WBa3YpDcY+UT2Iu+obAMIQSgoEo8doZrAw3+iWGZSlpOD1uzkcZMIrU+dnFfU5TVT7+36Pq89b8K5/tHTM9/cWcgtuVHDcYSzswwsYFvOSljwCsdlKOvg1Sk6xPMmvkxgHHeSyxR6E+CkyGk5+6p3Ys1BaQwF/Sc5ny7OJfC2W8M9HpROqN8JBdhKozUr7WDRYlsq6n8IxbkYre5+OxrMzcYdDzhbRj/zTGGkwwwxn10nfttrpw1VWvAJkoGibVT/9hBPswfuhOqBHJeaTRz2YPfGSdhldXvn6AyRAubbi+vx3kMjYzBRYHWIQvMxVGhjeFPUpjYt3lDUZR6/MGiF50rKHI+9HU8z7duPl/kERyKjRgEeyLZMJAiw5OIYJcigoKZF5RRbLKKfdlC4RcpNp2ixH/u9rnoRf+aOfM5Km6VzbYiuqizG0Oqs1KkqM4cVg0PlhxGvTQZolsrPZmONOXETmKphaiHOJo2JOtnN60gcHYh98kOL04PQl+OkUdiZ1yR3dJp6mhYtlOjgIDyGv2F10buDjiYu34=
