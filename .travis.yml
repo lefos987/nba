@@ -1,2 +1,2 @@
-install: ./configure.sh,
-script: ./build.sh
+install: sh configure.sh,
+script: sh build.sh
