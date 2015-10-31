@@ -8,7 +8,7 @@ class SchedulePage extends React.Component {
     render() {
 
         return (
-            <div>
+            <div className="schedule">
                 <h2>This is the schedule page</h2>
                 <DateSelection />
                 <GameList />

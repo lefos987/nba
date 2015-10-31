@@ -11,20 +11,22 @@ class Game extends React.Component {
         let game = this.props.game;
 
         return (
-            <li className="game row">
-                <div className="column">
-                    <div className="team row">
-                        <img className="team-logo" src={game.awayTeam.logo} alt=""/>
-                        <p>{game.awayTeam.name}</p>
+            <li className="game column">
+                <div className="row">
+                    <div className="column">
+                        <div className="team row">
+                            <img className="team-logo" src={game.awayTeam.logo} alt=""/>
+                            <p>{game.awayTeam.name}</p>
+                        </div>
+                    </div>
+                    <div className="column">
+                        <div className="team row">
+                            <p>{game.homeTeam.name}</p>
+                            <img className="team-logo" src={game.homeTeam.logo} alt=""/>
+                        </div>
                     </div>
                 </div>
-                <div className="column">
-                    <div className="team row">
-                        <p>{game.homeTeam.name}</p>
-                        <img className="team-logo" src={game.homeTeam.logo} alt=""/>
-                    </div>
-                </div>
-                <div className="rating column">{game.rating}</div>
+                <div className="rating row">{game.rating}</div>
             </li>
         );
     }

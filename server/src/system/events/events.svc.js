@@ -6,6 +6,7 @@ import { formatDate } from '../../core/services/utils.svc';
 class EventsService extends DbService{
 
     areAllEventsCompleted(events) {
+
         let result = (events.length > 0);
         events.forEach((event) => {
             result = (event.event_status === 'completed');
@@ -15,6 +16,8 @@ class EventsService extends DbService{
 
     getEventsFromApi(date) {
 
+        let sport = 'nba';
+
         date = formatDate(date);
 
         let req = new Request({
@@ -22,8 +25,8 @@ class EventsService extends DbService{
             host: XML_STATS_API.host,
             endpoint: XML_STATS_API.endpoints.events,
             headers: XML_STATS_API.headers,
-            urlParams: ['nba'],
-            query: { date }
+            query: { date, sport },
+            urlParams: []
         });
 
         let successHandler = (data) => ({

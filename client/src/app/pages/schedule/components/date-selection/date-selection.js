@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { formatDate } from '../../../../common/utils';
 import ScheduleStore from '../../stores/schedule.store';
 import ScheduleActions from '../../actions/schedule.actions';
 
@@ -43,15 +44,15 @@ class DateSelection extends React.Component {
         return (
             <div className="date-selection row">
 
-                <div className="column">
+                <div className="column previous">
                     <button onClick={this._previousDate}>Previous</button>
                 </div>
 
-                <div className="column">
-                    <p>{this.state.selectedDate.format('DD/MM/YYYY')}</p>
+                <div className="column selected-date">
+                    <p>{formatDate(this.state.selectedDate, 'dddd, DD MMM YYYY', true)}</p>
                 </div>
 
-                <div className="column">
+                <div className="column next">
                     {this._showNextDateButton() ?
                         <button onClick={this._nextDate}>Next</button> :
                         null }

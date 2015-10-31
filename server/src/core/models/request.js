@@ -21,13 +21,15 @@ class Request {
         this.urlParams.forEach((param) => {
             paramsUrl += '/' + param;
         });
-        return 'https://' + this.host + paramsUrl + '/' + this.endpoint;
+        return 'https://' + this.host + paramsUrl + this.endpoint;
     }
 
     send(errHandler, successHandler) {
 
         let deferred = q.defer();
 
+        console.log('this.url ->', this.url);
+        console.log('this.query ->', this.query);
         request(this.method, this.url)
             .set(this.headers)
             .query(this.query)

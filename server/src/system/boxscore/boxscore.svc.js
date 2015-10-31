@@ -52,7 +52,7 @@ class BoxscoreService extends DbService{
                         eventId: request.endpoint.split('.')[0],
                         data: data.res.body
                     });
-                    promises.push(delay(send, index, 12000, null, successHandler));
+                    promises.push(delay(send, index, 30000, null, successHandler));
                 });
 
                 return promises;

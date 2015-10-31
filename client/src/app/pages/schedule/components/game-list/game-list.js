@@ -38,7 +38,7 @@ class GameList extends React.Component {
 
         return (
             <div>
-                <ul>
+                <ul className="game-list">
                     {gameListItems}
                 </ul>
             </div>

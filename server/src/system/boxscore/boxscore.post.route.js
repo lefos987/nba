@@ -14,7 +14,7 @@ class BoxscoreRoute extends Route {
     handler(request, reply) {
 
         let date = request.payload.body.date;
-        
+
         BoxscoreService.getBoxscoresFromApi(date)
 
             .then((boxscorePromises) => {
@@ -50,6 +50,7 @@ class BoxscoreRoute extends Route {
             })
 
             .catch((error) => {
+                console.log('error ->', error);
                 reply(Boom.wrap(new Error(error)));
             });
     }

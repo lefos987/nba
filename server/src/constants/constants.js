@@ -11,7 +11,7 @@ export const XML_STATS_API = {
     },
     endpoints: {
         events: '/events.json',
-        boxscore: ''
+        boxscore: '/'
     }
 };
 
