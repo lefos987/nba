@@ -14,7 +14,7 @@ import SystemService from './system/system.svc';
 var server = new Hapi.Server();
 
 server.connection({
-    host: 'localhost',
+    host: process.env.IP || '0.0.0.0',
     port: process.env.PORT || 3000,
     routes: {
         cors: true

@@ -91,7 +91,7 @@
 	var server = new _hapi2['default'].Server();
 	
 	server.connection({
-	    host: 'localhost',
+	    host: process.env.IP || '0.0.0.0',
 	    port: process.env.PORT || 3000,
 	    routes: {
 	        cors: true
