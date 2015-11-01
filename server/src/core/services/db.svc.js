@@ -7,7 +7,14 @@ class DbService {
     constructor(params) {
 
         params = params || {};
-        this.client = params.client || redis.createClient();
+        if (process.env.REDISTOGO_URL) {
+            var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+            this.client = redis.createClient(rtg.port, rtg.hostname);
+            this.client.auth(rtg.auth.split(":")[1]);
+        } else {
+            this.client = params.client || redis.createClient();
+        }
+
     }
 
     /**

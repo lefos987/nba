@@ -68,19 +68,19 @@
 	
 	var _systemEventsEventsGetRoute2 = _interopRequireDefault(_systemEventsEventsGetRoute);
 	
-	var _systemEventsEventsPostRoute = __webpack_require__(17);
+	var _systemEventsEventsPostRoute = __webpack_require__(18);
 	
 	var _systemEventsEventsPostRoute2 = _interopRequireDefault(_systemEventsEventsPostRoute);
 	
-	var _systemBoxscoreBoxscoreGetRoute = __webpack_require__(20);
+	var _systemBoxscoreBoxscoreGetRoute = __webpack_require__(21);
 	
 	var _systemBoxscoreBoxscoreGetRoute2 = _interopRequireDefault(_systemBoxscoreBoxscoreGetRoute);
 	
-	var _systemBoxscoreBoxscorePostRoute = __webpack_require__(21);
+	var _systemBoxscoreBoxscorePostRoute = __webpack_require__(22);
 	
 	var _systemBoxscoreBoxscorePostRoute2 = _interopRequireDefault(_systemBoxscoreBoxscorePostRoute);
 	
-	var _scheduleScheduleGetRoute = __webpack_require__(24);
+	var _scheduleScheduleGetRoute = __webpack_require__(25);
 	
 	var _scheduleScheduleGetRoute2 = _interopRequireDefault(_scheduleScheduleGetRoute);
 	
@@ -564,7 +564,13 @@
 	        _classCallCheck(this, DbService);
 	
 	        params = params || {};
-	        this.client = params.client || _redis2['default'].createClient();
+	        if (process.env.REDISTOGO_URL) {
+	            var rtg = __webpack_require__(17).parse(process.env.REDISTOGO_URL);
+	            this.client = _redis2['default'].createClient(rtg.port, rtg.hostname);
+	            this.client.auth(rtg.auth.split(":")[1]);
+	        } else {
+	            this.client = params.client || _redis2['default'].createClient();
+	        }
 	    }
 	
 	    /**
@@ -767,6 +773,12 @@
 
 /***/ },
 /* 17 */
+/***/ function(module, exports) {
+
+	module.exports = require("url");
+
+/***/ },
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -807,7 +819,7 @@
 	
 	var _systemSvc2 = _interopRequireDefault(_systemSvc);
 	
-	var _eventsSvc = __webpack_require__(18);
+	var _eventsSvc = __webpack_require__(19);
 	
 	var _eventsSvc2 = _interopRequireDefault(_eventsSvc);
 	
@@ -874,7 +886,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -897,7 +909,7 @@
 	
 	var _coreServicesDbSvc2 = _interopRequireDefault(_coreServicesDbSvc);
 	
-	var _coreModelsRequest = __webpack_require__(19);
+	var _coreModelsRequest = __webpack_require__(20);
 	
 	var _coreModelsRequest2 = _interopRequireDefault(_coreModelsRequest);
 	
@@ -979,7 +991,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1055,7 +1067,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1115,7 +1127,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1152,7 +1164,7 @@
 	
 	var _systemSvc2 = _interopRequireDefault(_systemSvc);
 	
-	var _boxscoreSvc = __webpack_require__(22);
+	var _boxscoreSvc = __webpack_require__(23);
 	
 	var _boxscoreSvc2 = _interopRequireDefault(_boxscoreSvc);
 	
@@ -1214,7 +1226,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1245,15 +1257,15 @@
 	
 	var _coreServicesDbSvc2 = _interopRequireDefault(_coreServicesDbSvc);
 	
-	var _coreModelsRequest = __webpack_require__(19);
+	var _coreModelsRequest = __webpack_require__(20);
 	
 	var _coreModelsRequest2 = _interopRequireDefault(_coreModelsRequest);
 	
-	var _coreServicesRequestQueueSvc = __webpack_require__(23);
+	var _coreServicesRequestQueueSvc = __webpack_require__(24);
 	
 	var _coreServicesRequestQueueSvc2 = _interopRequireDefault(_coreServicesRequestQueueSvc);
 	
-	var _eventsEventsSvc = __webpack_require__(18);
+	var _eventsEventsSvc = __webpack_require__(19);
 	
 	var _eventsEventsSvc2 = _interopRequireDefault(_eventsEventsSvc);
 	
@@ -1329,7 +1341,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1383,7 +1395,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1412,7 +1424,7 @@
 	
 	var _constantsConstants = __webpack_require__(8);
 	
-	var _scheduleSvc = __webpack_require__(25);
+	var _scheduleSvc = __webpack_require__(26);
 	
 	var _scheduleSvc2 = _interopRequireDefault(_scheduleSvc);
 	
@@ -1449,7 +1461,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1476,11 +1488,11 @@
 	
 	var _coreServicesDbSvc2 = _interopRequireDefault(_coreServicesDbSvc);
 	
-	var _coreModelsGame = __webpack_require__(26);
+	var _coreModelsGame = __webpack_require__(27);
 	
 	var _coreModelsGame2 = _interopRequireDefault(_coreModelsGame);
 	
-	var _gameRatingGameRatingSvc = __webpack_require__(27);
+	var _gameRatingGameRatingSvc = __webpack_require__(28);
 	
 	var _gameRatingGameRatingSvc2 = _interopRequireDefault(_gameRatingGameRatingSvc);
 	
@@ -1543,7 +1555,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1644,7 +1656,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1657,7 +1669,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var _gameRatingConf = __webpack_require__(28);
+	var _gameRatingConf = __webpack_require__(29);
 	
 	var GameRatingService = (function () {
 	    function GameRatingService() {
@@ -1742,7 +1754,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports) {
 
 	"use strict";
