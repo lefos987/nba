@@ -21,7 +21,6 @@
     "lodash": "^3.10.1",
     "nodemon": "^1.4.0",
     "path": "^0.11.14",
-    "q": "^1.4.1",
     "webpack": "^1.10.5"
   },
   "dependencies": {
