@@ -325,7 +325,6 @@
 	
 	exports.XML_STATS_API = XML_STATS_API;
 	var INTERNAL_API = {
-	    host: 'http://localhost:3000',
 	    system: {
 	        events: '/api/v1/system/events',
 	        boxscores: '/api/v1/system/boxscores'
