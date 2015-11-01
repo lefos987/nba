@@ -1,4 +1,4 @@
-export const HOST = 'http://localhost:3000';
+export const HOST = '';
 
 export const API_ENDPOINTS = {
     SYSTEM: {

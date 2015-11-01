@@ -1024,7 +1024,7 @@ webpackJsonp([0],{
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
-	var HOST = 'http://localhost:3000';
+	var HOST = '';
 	
 	exports.HOST = HOST;
 	var API_ENDPOINTS = {
