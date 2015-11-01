@@ -4,6 +4,6 @@ deploy:
   provider: heroku
   api_key:
     secure: cDtHsTEi+pAX98/mm3u+XjRZpVYQLhNmobTCRNu4OScsRJ5lrnqt11FNrBWlAq750GT6Iw1pY5EiFjIkGnq6Bc7kF/31CGARZ8SZp7qKw5JRHRhz1z3IJWjOgmo+aplyFnwOQ88mDLiMGjgnpl8gxnkqTJ8BybgGV7ZkbaHe00GH1UNJbTJ4oV0SqRJrIAgqnMRvvtSN+X8PhJDDnH/VRj+Fq3GNf/AtQ4Qd8Hvaj32NwSHtsYd+VFMfNT2oUPB6NjgeTqNK6URJSIaBvTAQ+MeUnwiCa4c/QICgbYmqgsdKI6wig2E3Y2H3VWdYewBJzohtw5OV3hZeRoZfva4kNLXaZlBzX0xDuzc98adiGftT4yk/nSTbiwjHWeF7I3bx2prL8bg3wfhk51Kl6XxkEGorEE0ps0Epf68Cptz847mgIcy8wvsOR/Q0AJYBWhzAphB/Ee9C6InjahP7TVipZd4YygpOba2SVqNjznvzc8TFvVRBDML7CIguasNJhlJchx7oVi8RxtAB4Zba/wyA7adIitg/E/SWeKB7TG6X6nSEdkqBQB16dYZeSXVr2wq/OAAE/atUUl5oKYdcdArZ0KRf9BmKW83dbSOx+A5EylcQdtRa85DF7MchETBByTo4OL52R2LBqTVpIhuzjOdOuaFihMxXRtdse5HAjwz2lqQ=
-  app: macabre-plague-4572
+  app: my-nba-app
   on:
     repo: lefos987/nba
