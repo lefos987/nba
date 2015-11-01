@@ -1,0 +1,151 @@
+html,
+body {
+  height: 100%;
+}
+.container {
+  display: flex;
+  height: 100%;
+}
+.row {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 1;
+}
+.row.tall {
+  flex: 2;
+}
+.column {
+  display: flex;
+  flex-flow: column;
+  flex: 1;
+}
+.column.long {
+  flex: 2;
+}
+.header {
+  background: #ffc0cb;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 75px;
+}
+.logo {
+  background: #f00;
+}
+.logo .logo-img {
+  height: 75px;
+  object-fit: contain;
+}
+.menu {
+  background: #008000;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+}
+.menu .menu-item {
+  list-style: none;
+}
+.console {
+  flex: 1;
+  padding: 10px;
+  min-height: 500px;
+  font-family: Consolas, Menlo, Monaco, monospace;
+  background: #333;
+  color: #0f0;
+}
+.console .console-title {
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  border-bottom: 1px dashed #0f0;
+}
+.console .console-entries {
+  margin: 0;
+  padding: 0;
+}
+.console .console-entries .console-entry {
+  list-style: none;
+  margin-bottom: 10px;
+}
+.console .console-entries .console-entry.error {
+  color: #f00;
+}
+.console .console-entries .console-entry .console-entry-main-info {
+  margin: 0;
+}
+.console .console-entries .console-entry .console-entry-main-info .console-entry-message {
+  margin-left: 10px;
+}
+.console .console-entries .console-entry .console-entry-secondary-info {
+  margin: 0;
+  font-style: italic;
+}
+.system-command {
+  display: flex;
+  align-items: center;
+  padding: 25px;
+}
+.system-command .system-command-input-wrapper {
+  flex: 1;
+  align-items: center;
+  width: 50%;
+  padding: 0 10px;
+  color: #0f0;
+  background-color: #333;
+  font-family: Consolas, Menlo, Monaco, monospace;
+}
+.system-command .system-command-input {
+  flex: 3;
+  height: 40px;
+  border: 0;
+  padding-left: 10px;
+  font-size: 24px;
+  background-color: #333;
+  color: #0f0;
+}
+.system-command .system-command-input:focus {
+  outline: none;
+}
+.system-command .system-command-input-error {
+  background: #333;
+  color: #f00;
+  margin: 0;
+}
+.system-command .spinner .double-bounce1 {
+  background: #0f0;
+}
+.system {
+  padding: 25px;
+}
+.system .column {
+  margin: 0 10px;
+}
+.game-list {
+  padding: 0;
+}
+.game {
+  border-bottom: 1px solid #808080;
+  padding: 25px 10px;
+}
+.game .team {
+  align-items: center;
+  justify-content: space-around;
+}
+.game .team .team-logo {
+  width: 72px;
+  height: auto;
+}
+.game .rating {
+  align-items: center;
+  justify-content: center;
+}
+.date-selection .selected-date {
+  flex: 3;
+  align-items: center;
+  justify-content: center;
+}
+.schedule {
+  padding: 0 75px;
+}
+
+/*# sourceMappingURL=nba.css.map */
