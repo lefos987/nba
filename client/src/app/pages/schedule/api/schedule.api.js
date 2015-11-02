@@ -1,6 +1,6 @@
 import request from 'superagent';
 
-import { API_ENDPOINTS, HOST } from '../../../constants/nba.constants';
+import { API_ENDPOINTS } from '../../../constants/nba.constants';
 import ScheduleActions from '../actions/schedule.actions';
 import { formatDate } from '../../../common/utils';
 
@@ -11,7 +11,7 @@ let Api = {
         date = formatDate(date, 'YYYYMMDD');
 
         request
-            .get(HOST + API_ENDPOINTS.SCHEDULE)
+            .get(API_ENDPOINTS.SCHEDULE)
             .query({ date })
             .end((err, res) => {
                 if (err) {

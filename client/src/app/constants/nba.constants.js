@@ -1,5 +1,3 @@
-export const HOST = '';
-
 export const API_ENDPOINTS = {
     SYSTEM: {
         EVENTS: '/api/v1/system/events',
